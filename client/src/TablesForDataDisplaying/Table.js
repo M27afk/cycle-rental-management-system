@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import data from "./MockData.json";
+import axios from "axios";
+
 function Table() {
-  const [contents, setContent] = useState(data);
+  const [contents, setContent] = useState([]);
+  useEffect(() => {
+    const fetchContents = async () => {
+      try {
+        const res = await axios.get("https:localhost:8080/station");
+        setContent(res.data);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchContents();
+  }, []);
   return (
     <div className="container">
       <table className="content-table">
