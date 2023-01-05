@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
+import axios from "axios"
 
 function ServiceStationForms() {
   const [enteredSpare, setEnteredSpare] = useState("");
@@ -13,12 +14,18 @@ function ServiceStationForms() {
     setEnteredDate(event.target.value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     const customerData = {
       spare: enteredSpare,
       date: new Date(enteredDate),
     };
+        
+    try{
+      await axios.post("http://localhost:8080/service",customerData)
+    }catch(err){
+      console.log(err)
+    }
     console.log(customerData);
     setEnteredSpare("");
     setEnteredDate("");

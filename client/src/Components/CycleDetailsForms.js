@@ -1,15 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
+import axios from "axios"
 
-const options = ["Good", "Bad"];
+
+const options = ["Good", "Moderate","Poor"];
 const gearCheck = ["Yes", "No"];
 
 function CycleDetailsForms() {
-  const [enteredDistance, setEnteredDistance] = useState("");
-  const distanceChangeHandler = (event) => {
-    setEnteredDistance(event.target.value);
-  };
+  // const [enteredDistance, setEnteredDistance] = useState("");
+  // const distanceChangeHandler = (event) => {
+  //   setEnteredDistance(event.target.value);
+  // };
 
   const [enteredDate, setEnteredDate] = useState("");
   const dateChangeHandler = (event) => {
@@ -19,24 +21,30 @@ function CycleDetailsForms() {
   const [enteredIsGear, setEnteredIsGear] = useState(gearCheck[0]);
 
   const [enterdCondition, setEnterCondition] = useState(options[0]);
+  console.log(enterdCondition,enteredIsGear)
   // const SubscriptionChangeHandler = (event) => {
   //   console.log(event.target.value);
   //   setEnterSubscription(Number(event.target.value));
 
   // };
-  const submitHandler = (event) => {
+  const submitHandler =async (event) => {
+    const value=(enteredIsGear==="Yes"?1:0)
     event.preventDefault();
     const customerData = {
-      distance: enteredDistance,
-      date: new Date(enteredDate),
-      isgear: enteredIsGear,
-      condition: enterdCondition,
+      serviceDate:enteredDate,
+      isGear: value,
+      cycCondition: enterdCondition,
     };
     console.log(customerData);
-    setEnteredDistance("");
+    try{
+      await axios.post("http://localhost:8080/cycle",customerData)
+    }catch(err){
+      console.log(err)
+    }
+    // setEnteredDistance("");
     setEnteredDate("");
-
-    setEnterCondition("");
+    setEnteredIsGear(gearCheck[0]);
+    setEnterCondition(options[0]);
   };
   return (
     <div className="container">
@@ -58,7 +66,7 @@ function CycleDetailsForms() {
               ></input>
             </div>
 
-            <div className="new-expense__control">
+            {/* <div className="new-expense__control">
               <label>Distance Travelled </label>
               <input
                 type="number"
@@ -67,7 +75,7 @@ function CycleDetailsForms() {
                 value={enteredDistance}
                 required
               ></input>
-            </div>
+            </div> */}
 
             <div className="new-expense__control">
               <label>Cycle Condition</label>

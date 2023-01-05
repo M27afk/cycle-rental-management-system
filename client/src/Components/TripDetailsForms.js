@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
+import axios from "axios"
 
 function TripDetailsForms() {
   const [enteredDistance, setEnteredDistance] = useState("");
@@ -22,15 +23,23 @@ function TripDetailsForms() {
   const endTimeChangeHandler = (event) => {
     setEndEnterTime(event.target.value);
   };
-
-  const submitHandler = (event) => {
+  console.log(startEnterdTime+` `+endEnterdTime)
+  const submitHandler =async (event) => {
     event.preventDefault();
+
     const customerData = {
       spare: enteredDate,
-      date: new Date(enteredDate),
-      Start_time: startEnterdTime,
-      End_time: endEnterdTime,
+      date: enteredDate,
+      beginTime: enteredDate+` `+startEnterdTime+`:00`,
+      endTime: enteredDate+` `+endEnterdTime+`:00`,
     };
+    console.log(customerData.date)
+    
+    try{
+      await axios.post("http://localhost:8080/tripdetails",customerData)
+    }catch(err){
+      console.log(err)
+    }
     console.log(customerData);
     setEnteredDistance("");
     setEnteredDate("");

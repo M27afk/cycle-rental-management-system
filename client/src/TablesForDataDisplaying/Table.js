@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import data from "./MockData.json";
+// data from "./MockData.json";
 import axios from "axios";
 
 function Table() {
@@ -8,7 +8,8 @@ function Table() {
   useEffect(() => {
     const fetchContents = async () => {
       try {
-        const res = await axios.get("https:localhost:8080/station");
+        const res = await axios.get("http://localhost:8080/station");
+        console.log(res.data)
         setContent(res.data);
         console.log(res);
       } catch (err) {
@@ -25,7 +26,7 @@ function Table() {
             <th>Station ID</th>
             <th>Station Name</th>
             <th>Station Address</th>
-            <th>Cycle Cpacity</th>
+            <th>Cycle Capacity</th>
             <th>Employee ID</th>
           </tr>
         </thead>

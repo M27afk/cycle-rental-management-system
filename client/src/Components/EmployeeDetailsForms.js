@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
+import axios from "axios";
+
 
 function EmployeeDetailsForms() {
   const [enteredName, setEnteredName] = useState("");
@@ -13,22 +15,27 @@ function EmployeeDetailsForms() {
     setEnteredDate(event.target.value);
   };
 
-  const [enteredAddress, setEnteredTAddress] = useState("");
+  const [enteredAddress, setEnteredAddress] = useState("");
   const addressChangeHandler = (event) => {
-    setEnteredTAddress(event.target.value);
+    setEnteredAddress(event.target.value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler =async (event) => {
     event.preventDefault();
     const customerData = {
-      name: enteredName,
-      date: new Date(enteredDate),
-      address: enteredAddress,
+      empName: enteredName,
+      dob: enteredDate,
+      empAddress: enteredAddress,
     };
     console.log(customerData);
+    try{
+      await axios.post("http://localhost:8080/employee",customerData)
+    }catch(err){
+      console.log(err)
+    }
     setEnteredName("");
     setEnteredDate("");
-    setEnteredTAddress("");
+    setEnteredAddress("");
   };
   return (
     <div className="container">
@@ -65,7 +72,7 @@ function EmployeeDetailsForms() {
               <label>Address</label>
               <input
                 type="text"
-                placeholder="Enter your address"
+                placeholder="Enter employee address"
                 onChange={addressChangeHandler}
                 value={enteredAddress}
                 required

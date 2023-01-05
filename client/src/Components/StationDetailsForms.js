@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
+import axios from "axios"
 
 function CustomerDetailsForms() {
   const [enteredName, setEnteredName] = useState("");
@@ -13,12 +14,18 @@ function CustomerDetailsForms() {
     setEnteredTAddress(event.target.value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler =async (event) => {
     event.preventDefault();
     const customerData = {
       StaionName: enteredName,
       address: enteredAddress,
     };
+    
+    try{
+      await axios.post("http://localhost:8080/station",customerData)
+    }catch(err){
+      console.log(err)
+    }
     console.log(customerData);
     setEnteredName("");
     setEnteredTAddress("");
