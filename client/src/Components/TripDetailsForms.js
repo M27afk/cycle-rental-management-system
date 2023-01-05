@@ -1,17 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
-import axios from "axios"
+import axios from "axios";
 
 function TripDetailsForms() {
+  const [enteredDate, setEnteredDate] = useState("");
+  const dateChangeHandler = (event) => {
+    setEnteredDate(event.target.value);
+  };
+
   const [enteredDistance, setEnteredDistance] = useState("");
   const distanceChangeHandler = (event) => {
     setEnteredDistance(event.target.value);
   };
 
-  const [enteredDate, setEnteredDate] = useState("");
-  const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);
+  const [enteredCustomerId, setEntereCustomerId] = useState("");
+  const CustomerChangeHandler = (event) => {
+    setEntereCustomerId(event.target.value);
   };
 
   const [startEnterdTime, setStartEnterTime] = useState("");
@@ -23,22 +28,41 @@ function TripDetailsForms() {
   const endTimeChangeHandler = (event) => {
     setEndEnterTime(event.target.value);
   };
-  console.log(startEnterdTime+` `+endEnterdTime)
-  const submitHandler =async (event) => {
+
+  const [enteredCycId, setEnteredCycId] = useState("");
+  const cycleIdChangeHandler = (event) => {
+    setEnteredCycId(event.target.value);
+  };
+
+  const [enteredStartStaionId, setEnteredStartStaionId] = useState("");
+  const startStationIdChangeHandler = (event) => {
+    setEnteredStartStaionId(event.target.value);
+  };
+
+  const [enteredEndtStaionId, setEnteredSEndStaionId] = useState("");
+  const endStationIdChangeHandler = (event) => {
+    setEnteredSEndStaionId(event.target.value);
+  };
+
+  console.log(startEnterdTime + ` ` + endEnterdTime);
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     const customerData = {
-      spare: enteredDate,
-      date: enteredDate,
-      beginTime: enteredDate+` `+startEnterdTime+`:00`,
-      endTime: enteredDate+` `+endEnterdTime+`:00`,
+      custID: enteredCustomerId,
+      cycID: enteredCycId,
+      stnID_start: enteredStartStaionId,
+      stnID_end: enteredEndtStaionId,
+      beginTime: enteredDate + ` ` + startEnterdTime + `:00`,
+      endTime: enteredDate + ` ` + endEnterdTime + `:00`,
+      distTravelled: enteredDistance,
     };
-    console.log(customerData.date)
-    
-    try{
-      await axios.post("http://localhost:8080/tripdetails",customerData)
-    }catch(err){
-      console.log(err)
+    console.log(customerData.date);
+
+    try {
+      await axios.post("http://localhost:8080/tripdetails", customerData);
+    } catch (err) {
+      console.log(err);
     }
     console.log(customerData);
     setEnteredDistance("");
@@ -55,11 +79,20 @@ function TripDetailsForms() {
         <form onSubmit={submitHandler}>
           <div className="new-expense__controls">
             <div className="new-expense__control">
-              <label>Date </label>
+              <label>Date</label>
               <input
                 type="date"
                 onChange={dateChangeHandler}
                 value={enteredDate}
+                required
+              ></input>
+            </div>
+            <div className="new-expense__control">
+              <label>Customer ID</label>
+              <input
+                type="number"
+                onChange={CustomerChangeHandler}
+                value={enteredCustomerId}
                 required
               ></input>
             </div>
@@ -91,6 +124,37 @@ function TripDetailsForms() {
                 type="Time"
                 onChange={endTimeChangeHandler}
                 value={endEnterdTime}
+                required
+              ></input>
+            </div>
+
+            <div className="new-expense__control">
+              <label>Cycle ID</label>
+              <input
+                type="number"
+                placeholder="Enter cycle ID"
+                onChange={cycleIdChangeHandler}
+                value={enteredCycId}
+                required
+              ></input>
+            </div>
+
+            <div className="new-expense__control">
+              <label>Staion ID Start</label>
+              <input
+                type="number"
+                onChange={startStationIdChangeHandler}
+                value={enteredStartStaionId}
+                required
+              ></input>
+            </div>
+
+            <div className="new-expense__control">
+              <label>Staion ID End</label>
+              <input
+                type="number"
+                onChange={endStationIdChangeHandler}
+                value={enteredEndtStaionId}
                 required
               ></input>
             </div>

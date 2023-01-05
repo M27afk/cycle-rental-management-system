@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
-import axios from "axios"
+import axios from "axios";
 
 function ServiceStationForms() {
   const [enteredSpare, setEnteredSpare] = useState("");
@@ -14,17 +14,28 @@ function ServiceStationForms() {
     setEnteredDate(event.target.value);
   };
 
+  const [enteredEmpId, setEnteredEmpId] = useState("");
+  const empChangeHandler = (event) => {
+    setEnteredEmpId(event.target.value);
+  };
+
+  const [enteredCycId, setEnteredCycId] = useState("");
+  const cycleIdChangeHandler = (event) => {
+    setEnteredCycId(event.target.value);
+  };
   const submitHandler = async (event) => {
     event.preventDefault();
     const customerData = {
-      spare: enteredSpare,
-      date: new Date(enteredDate),
+      empID: enteredEmpId,
+      sparePartsCount: enteredSpare,
+      dueDate: new Date(enteredDate),
+      cycID: enteredCycId,
     };
-        
-    try{
-      await axios.post("http://localhost:8080/service",customerData)
-    }catch(err){
-      console.log(err)
+
+    try {
+      await axios.post("http://localhost:8080/service", customerData);
+    } catch (err) {
+      console.log(err);
     }
     console.log(customerData);
     setEnteredSpare("");
@@ -57,6 +68,28 @@ function ServiceStationForms() {
                 placeholder="Number of Spare Parts Used"
                 onChange={spareChangeHandler}
                 value={enteredSpare}
+                required
+              ></input>
+            </div>
+
+            <div className="new-expense__control">
+              <label>Employee ID</label>
+              <input
+                type="number"
+                placeholder="Enter employee ID"
+                onChange={empChangeHandler}
+                value={enteredEmpId}
+                required
+              ></input>
+            </div>
+
+            <div className="new-expense__control">
+              <label>Cycle ID</label>
+              <input
+                type="number"
+                placeholder="Enter cycle ID"
+                onChange={cycleIdChangeHandler}
+                value={enteredCycId}
                 required
               ></input>
             </div>

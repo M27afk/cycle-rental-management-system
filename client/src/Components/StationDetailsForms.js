@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
-import axios from "axios"
+import axios from "axios";
 
 function CustomerDetailsForms() {
   const [enteredName, setEnteredName] = useState("");
@@ -14,17 +14,28 @@ function CustomerDetailsForms() {
     setEnteredTAddress(event.target.value);
   };
 
-  const submitHandler =async (event) => {
+  const [enteredCycCpacity, setEnteredCycCpacity] = useState("");
+  const cycleChangeHandler = (event) => {
+    setEnteredCycCpacity(event.target.value);
+  };
+
+  const [enteredEmpId, setEnteredEmpId] = useState("");
+  const empChangeHandler = (event) => {
+    setEnteredEmpId(event.target.value);
+  };
+  const submitHandler = async (event) => {
     event.preventDefault();
     const customerData = {
-      StaionName: enteredName,
-      address: enteredAddress,
+      stnName: enteredName,
+      stnAddress: enteredAddress,
+      cycCpacity: enteredCycCpacity,
+      empID: enteredEmpId,
     };
-    
-    try{
-      await axios.post("http://localhost:8080/station",customerData)
-    }catch(err){
-      console.log(err)
+
+    try {
+      await axios.post("http://localhost:8080/station", customerData);
+    } catch (err) {
+      console.log(err);
     }
     console.log(customerData);
     setEnteredName("");
@@ -58,6 +69,28 @@ function CustomerDetailsForms() {
                 placeholder="Enter your address"
                 onChange={addressChangeHandler}
                 value={enteredAddress}
+                required
+              ></input>
+            </div>
+
+            <div className="new-expense__control">
+              <label>Cycle capacity</label>
+              <input
+                type="number"
+                placeholder="Enter cycle capacity"
+                onChange={cycleChangeHandler}
+                value={enteredCycCpacity}
+                required
+              ></input>
+            </div>
+
+            <div className="new-expense__control">
+              <label>Employee ID</label>
+              <input
+                type="number"
+                placeholder="Enter employee ID"
+                onChange={empChangeHandler}
+                value={enteredEmpId}
                 required
               ></input>
             </div>

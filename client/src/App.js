@@ -6,12 +6,11 @@ import EmployeeDetailsForms from "./Components/EmployeeDetailsForms";
 import ServiceStationForms from "./Components/ServiceStationForms";
 import StationDetailsForms from "./Components/StationDetailsForms";
 import TripDetailsForms from "./Components/TripDetailsForms";
-import Table from "./TablesForDataDisplaying/Table";
+import Table from "./TablesForDataDisplaying/StationTable";
 function App() {
   return (
     <div>
-      
-    <EmployeeDetailsForms/>
+      <EmployeeDetailsForms />
     </div>
   );
 }
