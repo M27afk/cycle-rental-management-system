@@ -20,15 +20,15 @@ function CustomerDetailsForms() {
   const addressChangeHandler = (event) => {
     setEnteredTAddress(event.target.value);
   };
- // console.log(options[0])
+  // console.log(options[0])
   const [enteredSubscription, setEnterSubscription] = useState([options[0]]);
-  console.log(enteredSubscription)
+  console.log(enteredSubscription);
   // const SubscriptionChangeHandler = (event) => {
   //   console.log(event.target.value);
   //   setEnterSubscription(Number(event.target.value));
 
   // };
-  const submitHandler =async (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     const customerData = {
       custName: enteredName,
@@ -36,12 +36,12 @@ function CustomerDetailsForms() {
       custAddress: enteredAddress,
       subscriptionType: enteredSubscription,
     };
-    console.log(customerData.subscribedOn)
+    console.log(customerData.subscribedOn);
 
-    try{
-      await axios.post("http://localhost:8080/customer",customerData)
-    }catch(err){
-      console.log(err)
+    try {
+      await axios.post("http://localhost:8080/customer", customerData);
+    } catch (err) {
+      console.log(err);
     }
     console.log(customerData);
     setEnteredName("");
@@ -91,26 +91,26 @@ function CustomerDetailsForms() {
                   <option value={value} key={value}>
                     {value}
                   </option>
-                  ))}
-                </select>
-              </div>
-              <div className="new-expense__control">
-                <label>Address</label>
-                <input
-                  type="text"
-                  placeholder="Enter your address"
-                  onChange={addressChangeHandler}
-                  value={enteredAddress}
-                  required
-                ></input>
-              </div>
+                ))}
+              </select>
             </div>
-            <div className="new-expense__actions">
-              <button type="submit">Next</button>
+            <div className="new-expense__control">
+              <label>Address</label>
+              <input
+                type="text"
+                placeholder="Enter your address"
+                onChange={addressChangeHandler}
+                value={enteredAddress}
+                required
+              ></input>
             </div>
-          </form>
-        </div>
+          </div>
+          <div className="new-expense__actions">
+            <button type="submit">Next</button>
+          </div>
+        </form>
       </div>
-    );
-  }
-  export default CustomerDetailsForms;
+    </div>
+  );
+}
+export default CustomerDetailsForms;

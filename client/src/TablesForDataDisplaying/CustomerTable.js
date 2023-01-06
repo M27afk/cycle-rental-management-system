@@ -3,7 +3,7 @@ import "./style.css";
 // data from "./MockData.json";
 import axios from "axios";
 
-function Table() {
+function CustomerTable() {
   const [contents, setContent] = useState([]);
   useEffect(() => {
     const fetchContents = async () => {
@@ -18,6 +18,14 @@ function Table() {
     };
     fetchContents();
   }, []);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete("http://localhost:8080/customer" + id);
+      window.location.reload();
+    } catch {
+      console.log(err);
+    }
+  };
   return (
     <div className="container">
       <table className="content-table">
@@ -30,6 +38,7 @@ function Table() {
             <th>subscribed On</th>
             <th>subscribedUpto</th>
             <th>distCycled</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +51,25 @@ function Table() {
               <td>{content.subscribedOn}</td>
               <td>{content.subscribedUpto}</td>
               <td>{content.distCycled}</td>
+              <td>
+                <button
+                  className="edit-delete-buttons"
+                  variant="tertiary"
+                  size="xs"
+                >
+                  <link to={`/update/${content.custID}`}></link>
+                </button>
+                <button
+                  className="edit-delete-buttons"
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => {
+                    handleDelete(content.custID);
+                  }}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -50,4 +78,4 @@ function Table() {
   );
 }
 
-export default Table;
+export default CustomerTable;

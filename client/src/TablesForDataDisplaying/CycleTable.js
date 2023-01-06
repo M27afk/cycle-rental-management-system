@@ -3,7 +3,7 @@ import "./style.css";
 // data from "./MockData.json";
 import axios from "axios";
 
-function Table() {
+function CycleTable() {
   const [contents, setContent] = useState([]);
   useEffect(() => {
     const fetchContents = async () => {
@@ -48,4 +48,4 @@ function Table() {
   );
 }
 
-export default Table;
+export default CycleTable;

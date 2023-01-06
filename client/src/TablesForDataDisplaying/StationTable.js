@@ -3,13 +3,13 @@ import "./style.css";
 // data from "./MockData.json";
 import axios from "axios";
 
-function Table() {
+function StationTable() {
   const [contents, setContent] = useState([]);
   useEffect(() => {
     const fetchContents = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/station");
-        console.log(res.data)
+        const res = await axios.get("http://localhost:8080/");
+        console.log(res.data);
         setContent(res.data);
         console.log(res);
       } catch (err) {
@@ -46,4 +46,4 @@ function Table() {
   );
 }
 
-export default Table;
+export default StationTable;
