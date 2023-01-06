@@ -8,7 +8,7 @@ function StationTable() {
   useEffect(() => {
     const fetchContents = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/");
+        const res = await axios.get("http://localhost:8080/station");
         console.log(res.data);
         setContent(res.data);
         console.log(res);

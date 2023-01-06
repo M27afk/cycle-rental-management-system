@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 // data from "./MockData.json";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function CustomerTable() {
   const [contents, setContent] = useState([]);
   useEffect(() => {
     const fetchContents = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/");
-        console.log(res.data);
+        const res = await axios.get("http://localhost:8080/customer");
+      //  console.log(res.data);
         setContent(res.data);
-        console.log(res);
+    //    console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -19,10 +20,12 @@ function CustomerTable() {
     fetchContents();
   }, []);
   const handleDelete = async (id) => {
+   
     try {
-      await axios.delete("http://localhost:8080/customer" + id);
+      await axios.delete("http://localhost:8080/customer/" + id);
+      console.log("called")
       window.location.reload();
-    } catch {
+    } catch (err){
       console.log(err);
     }
   };
@@ -34,10 +37,10 @@ function CustomerTable() {
             <th>Customer ID</th>
             <th>Customer Name</th>
             <th>Customer Address</th>
-            <th>subscription type</th>
-            <th>subscribed On</th>
-            <th>subscribedUpto</th>
-            <th>distCycled</th>
+            <th>Subscription Type</th>
+            <th>Subscribed On</th>
+            <th>Subscribed Upto</th>
+            <th>Distance Cycled</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -52,13 +55,13 @@ function CustomerTable() {
               <td>{content.subscribedUpto}</td>
               <td>{content.distCycled}</td>
               <td>
-                <button
+              <Link to={`/customer/${content.custID}`}> <button
                   className="edit-delete-buttons"
                   variant="tertiary"
                   size="xs"
                 >
-                  <link to={`/update/${content.custID}`}></link>
-                </button>
+                Update
+                </button>  </Link>
                 <button
                   className="edit-delete-buttons"
                   variant="tertiary"

@@ -2,10 +2,11 @@ import React from "react";
 import { useState } from "react";
 import "./style.css";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router";
 
 const options = ["Basic", "Premium"];
 function UpdateCustomerTable() {
-  const [Data, setUpdatedData] = useState({
+  const [custUpdatedData, setUpdatedData] = useState({
     custName: "",
     subscribedOn: "",
     custAddress: "",
@@ -14,14 +15,23 @@ function UpdateCustomerTable() {
   });
 
   const [error, setError] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const custID = location.pathname.split("/")[2];
 
   const handleChange = (e) => {
     setUpdatedData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    console.log(custUpdatedData)
   };
-  const handleClick = async (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:8080/customer/ `, Data);
+     console.log(custUpdatedData)
+      await axios.put(`http://localhost:8080/customer/${custID}`, custUpdatedData);
+      console.log("Axios called")
+      navigate("/customer")
     } catch (err) {
       console.log(err);
       setError(true);
@@ -35,7 +45,7 @@ function UpdateCustomerTable() {
           {/* <img src="img/trin.png" alt="trin trin logo" className="trin-img" /> */}
         </div>
 
-        <form onSubmit={submitHandler}>
+        <form>
           <div className="new-expense__controls">
             <div className="new-expense__control">
               <label>Full Name</label>
@@ -90,7 +100,7 @@ function UpdateCustomerTable() {
             </div>
           </div>
           <div className="new-expense__actions">
-            <button type="submit">Update</button>
+            <button onClick={handleSubmit}>Update</button>
           </div>
         </form>
       </div>

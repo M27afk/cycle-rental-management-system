@@ -36,7 +36,7 @@ function CycleTable() {
             <tr>
               <td>{content.cycID}</td>
               <td>{content.distTravelled}</td>
-              <td>{content.isGear}</td>
+              <td>{content.isGear ? ("Yes"):("No")}</td>
               <td>{content.serviceDate}</td>
               <td>{content.cycCondition}</td>
               <td>{content.serviceID}</td>

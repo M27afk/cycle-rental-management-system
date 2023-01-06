@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const options = ["Basic", "Premium"];
 
@@ -27,7 +28,9 @@ function CustomerDetailsForms() {
   //   console.log(event.target.value);
   //   setEnterSubscription(Number(event.target.value));
 
+  
   // };
+  const navigate = useNavigate();
   const submitHandler = async (event) => {
     event.preventDefault();
     const customerData = {
@@ -36,14 +39,15 @@ function CustomerDetailsForms() {
       custAddress: enteredAddress,
       subscriptionType: enteredSubscription,
     };
-    console.log(customerData.subscribedOn);
+    //console.log(customerData.subscribedOn);
 
     try {
       await axios.post("http://localhost:8080/customer", customerData);
+      navigate("/customer")
     } catch (err) {
       console.log(err);
     }
-    console.log(customerData);
+    //console.log(customerData);
     setEnteredName("");
     setEnteredDate("");
     setEnteredTAddress("");
