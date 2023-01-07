@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 // data from "./MockData.json";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 function EmployeeTable() {
   const [contents, setContent] = useState([]);
   useEffect(() => {
@@ -18,6 +18,15 @@ function EmployeeTable() {
     };
     fetchContents();
   }, []);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete("http://localhost:8080/employee/" + id);
+      console.log("called");
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="container">
       <table className="content-table">
@@ -29,6 +38,7 @@ function EmployeeTable() {
             <th>Date of Birth</th>
             <th>Staion ID</th>
             <th>Service ID</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +50,30 @@ function EmployeeTable() {
               <td>{content.dob}</td>
               <td>{content.stnID}</td>
               <td>{content.servID}</td>
+              <td>
+                <td>
+                  <Link to={`/employee/${content.empID}`}>
+                    {" "}
+                    <button
+                      className="edit-delete-buttons"
+                      variant="tertiary"
+                      size="xs"
+                    >
+                      Update
+                    </button>{" "}
+                  </Link>
+                  <button
+                    className="edit-delete-buttons"
+                    variant="tertiary"
+                    size="xs"
+                    onClick={() => {
+                      handleDelete(content.empID);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </td>
             </tr>
           ))}
         </tbody>

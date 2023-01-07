@@ -4,37 +4,38 @@ import "./style.css";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 
-const options = ["Basic", "Premium"];
-function UpdateCustomerTable() {
-  const [custUpdatedData, setUpdatedData] = useState({
-    custName: "",
-    subscribedOn: "",
-    custAddress: "",
-    subscriptionType: [options[0]],
-    distCycled: "",
+const options = ["Good", "Modrate", "Poor"];
+const isGearOption = ["yes", "No"];
+
+function UpdateCycleTable() {
+  const [cycleUpdatedData, setUpdatedData] = useState({
+    distTravelled: "",
+    isGear: [isGearOption[0]],
+    ServiceDate: "",
+    CycCondition: [options[0]],
   });
 
   const [error, setError] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const custID = location.pathname.split("/")[2];
+  const cycID = location.pathname.split("/")[2];
 
   const handleChange = (e) => {
     setUpdatedData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(custUpdatedData);
+    console.log(cycleUpdatedData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(custUpdatedData);
+      console.log(cycleUpdatedData);
       await axios.put(
-        `http://localhost:8080/customer/${custID}`,
-        custUpdatedData
+        `http://localhost:8080/customer/${cycID}`,
+        cycleUpdatedData
       );
       console.log("Axios called");
-      navigate("/customer");
+      navigate("/cycle");
     } catch (err) {
       console.log(err);
       setError(true);
@@ -44,35 +45,35 @@ function UpdateCustomerTable() {
     <div className="container">
       <div className="new-expense">
         <div className="login-header">
-          <header className="titles">Customer Details Updation Form</header>
+          <header className="titles">Cycle Details Updation Form</header>
           {/* <img src="img/trin.png" alt="trin trin logo" className="trin-img" /> */}
         </div>
 
         <form>
           <div className="new-expense__controls">
             <div className="new-expense__control">
-              <label>Full Name</label>
+              <label>Distance Travelled</label>
               <input
-                type="text"
-                placeholder="Enter your name"
+                type="number"
+                placeholder="Enter dist travelled"
                 onChange={handleChange}
-                name="custName"
+                name="distTravelled"
               ></input>
             </div>
 
             <div className="new-expense__control">
-              <label>Subscribed On</label>
+              <label>Service Date</label>
               <input
                 type="date"
                 onChange={handleChange}
-                name="subscribedOn"
+                name="ServiceDate"
               ></input>
             </div>
 
             <div className="new-expense__control">
-              <label>Subscription Type</label>
+              <label>Cycle Condition</label>
               <select
-                name="subscriptionType"
+                name="CycCondition"
                 onChange={(event) => setUpdatedData(event.target.value)}
               >
                 {options.map((value) => (
@@ -83,23 +84,17 @@ function UpdateCustomerTable() {
               </select>
             </div>
             <div className="new-expense__control">
-              <label>Address</label>
-              <input
-                type="text"
-                placeholder="Enter your address"
-                onChange={handleChange}
-                name="custAddress"
-              ></input>
-            </div>
-
-            <div className="new-expense__control">
-              <label>Distance Travelled</label>
-              <input
-                type="number"
-                placeholder="Enter the distance Travelled"
-                onChange={handleChange}
-                name="distCycled"
-              ></input>
+              <label>Is Gear</label>
+              <select
+                name="isGear"
+                onChange={(event) => setUpdatedData(event.target.value)}
+              >
+                {isGearOption.map((value) => (
+                  <option value={value} key={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="new-expense__actions">
@@ -111,4 +106,4 @@ function UpdateCustomerTable() {
   );
 }
 
-export default UpdateCustomerTable;
+export default UpdateCycleTable;

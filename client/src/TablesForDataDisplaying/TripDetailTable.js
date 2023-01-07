@@ -8,7 +8,7 @@ function TripDetailTable() {
   useEffect(() => {
     const fetchContents = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/");
+        const res = await axios.get("http://localhost:8080/tripdetails");
         console.log(res.data);
         setContent(res.data);
         console.log(res);
@@ -18,6 +18,15 @@ function TripDetailTable() {
     };
     fetchContents();
   }, []);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete("http://localhost:8080/tripdetails/" + id);
+      console.log("called");
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="container">
       <table className="content-table">
@@ -31,6 +40,7 @@ function TripDetailTable() {
             <th>Distance Travelled</th>
             <th>BeginTime</th>
             <th>End Time</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -44,6 +54,28 @@ function TripDetailTable() {
               <td>{content.distTravelled}</td>
               <td>{content.beginTime}</td>
               <td>{content.endTime}</td>
+              <td>
+                <Link to={`/tripdetails/${content.tripID}`}>
+                  {" "}
+                  <button
+                    className="edit-delete-buttons"
+                    variant="tertiary"
+                    size="xs"
+                  >
+                    Update
+                  </button>{" "}
+                </Link>
+                <button
+                  className="edit-delete-buttons"
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => {
+                    handleDelete(content.tripID);
+                  }}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
