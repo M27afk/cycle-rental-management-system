@@ -4,37 +4,36 @@ import "./style.css";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 
-const options = ["Basic", "Premium"];
-function UpdateCustomerTable() {
-  const [custUpdatedData, setUpdatedData] = useState({
-    custName: "",
-    subscribedOn: "",
-    custAddress: "",
-    subscriptionType: [options[0]],
-    distCycled: "",
+function UpdateTripDetailTable() {
+  const [tripUpdatedData, setUpdatedData] = useState({
+    stnID_start: "",
+    stnID_end: "",
+    distTravelled: "",
+    beginTime: "",
+    endTime: "",
   });
 
   const [error, setError] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const custID = location.pathname.split("/")[2];
+  const tripID = location.pathname.split("/")[2];
 
   const handleChange = (e) => {
     setUpdatedData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(custUpdatedData);
+    console.log(tripUpdatedData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(custUpdatedData);
+      console.log(tripUpdatedData);
       await axios.put(
-        `http://localhost:8080/customer/${custID}`,
-        custUpdatedData
+        `http://localhost:8080/tripdetails/${tripID}`,
+        tripUpdatedData
       );
       console.log("Axios called");
-      navigate("/customer");
+      navigate("/tripdetails");
     } catch (err) {
       console.log(err);
       setError(true);
@@ -51,55 +50,46 @@ function UpdateCustomerTable() {
         <form>
           <div className="new-expense__controls">
             <div className="new-expense__control">
-              <label>Full Name</label>
+              <label>Station ID start</label>
               <input
-                type="text"
-                placeholder="Enter your name"
+                type="number"
+                placeholder="Enter the distance Travelled"
                 onChange={handleChange}
-                name="custName"
+                name="stnID_start"
               ></input>
             </div>
 
             <div className="new-expense__control">
-              <label>Subscribed On</label>
+              <label>Station ID end</label>
               <input
-                type="date"
+                type="number"
+                placeholder="Enter the distance Travelled"
                 onChange={handleChange}
-                name="subscribedOn"
+                name="stnID_end"
               ></input>
             </div>
-
-            <div className="new-expense__control">
-              <label>Subscription Type</label>
-              <select
-                name="subscriptionType"
-                onChange={(event) => setUpdatedData(event.target.value)}
-              >
-                {options.map((value) => (
-                  <option value={value} key={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="new-expense__control">
-              <label>Address</label>
-              <input
-                type="text"
-                placeholder="Enter your address"
-                onChange={handleChange}
-                name="custAddress"
-              ></input>
-            </div>
-
             <div className="new-expense__control">
               <label>Distance Travelled</label>
               <input
                 type="number"
                 placeholder="Enter the distance Travelled"
                 onChange={handleChange}
-                name="distCycled"
+                name="distTravelled"
               ></input>
+            </div>
+
+            <div className="new-expense__control">
+              <label>Begin Time</label>
+              <input
+                type="time"
+                onChange={handleChange}
+                name="beginTime"
+              ></input>
+            </div>
+
+            <div className="new-expense__control">
+              <label>End Time</label>
+              <input type="time" onChange={handleChange} name="endTime"></input>
             </div>
           </div>
           <div className="new-expense__actions">
@@ -111,4 +101,4 @@ function UpdateCustomerTable() {
   );
 }
 
-export default UpdateCustomerTable;
+export default UpdateTripDetailTable;

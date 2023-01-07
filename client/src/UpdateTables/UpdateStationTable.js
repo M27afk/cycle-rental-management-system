@@ -4,37 +4,35 @@ import "./style.css";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 
-const options = ["Basic", "Premium"];
-function UpdateCustomerTable() {
-  const [custUpdatedData, setUpdatedData] = useState({
-    custName: "",
-    subscribedOn: "",
-    custAddress: "",
-    subscriptionType: [options[0]],
-    distCycled: "",
+function UpdateStaionTable() {
+  const [stationUpdatedData, setUpdatedData] = useState({
+    stnName: "",
+    stnAddress: "",
+    cycCapacity: "",
+    empID: "",
   });
 
   const [error, setError] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const custID = location.pathname.split("/")[2];
+  const stnID = location.pathname.split("/")[2];
 
   const handleChange = (e) => {
     setUpdatedData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(custUpdatedData);
+    console.log(stationUpdatedData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(custUpdatedData);
+      console.log(stationUpdatedData);
       await axios.put(
-        `http://localhost:8080/customer/${custID}`,
-        custUpdatedData
+        `http://localhost:8080/station/${stnID}`,
+        stationUpdatedData
       );
       console.log("Axios called");
-      navigate("/customer");
+      navigate("/station");
     } catch (err) {
       console.log(err);
       setError(true);
@@ -44,61 +42,38 @@ function UpdateCustomerTable() {
     <div className="container">
       <div className="new-expense">
         <div className="login-header">
-          <header className="titles">Customer Details Updation Form</header>
+          <header className="titles">Station Details Updation Form</header>
           {/* <img src="img/trin.png" alt="trin trin logo" className="trin-img" /> */}
         </div>
 
         <form>
           <div className="new-expense__controls">
             <div className="new-expense__control">
-              <label>Full Name</label>
+              <label>Station Name</label>
               <input
                 type="text"
-                placeholder="Enter your name"
+                placeholder="Enter stn name"
                 onChange={handleChange}
-                name="custName"
+                name="stnName"
               ></input>
             </div>
 
-            <div className="new-expense__control">
-              <label>Subscribed On</label>
-              <input
-                type="date"
-                onChange={handleChange}
-                name="subscribedOn"
-              ></input>
-            </div>
-
-            <div className="new-expense__control">
-              <label>Subscription Type</label>
-              <select
-                name="subscriptionType"
-                onChange={(event) => setUpdatedData(event.target.value)}
-              >
-                {options.map((value) => (
-                  <option value={value} key={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
-            </div>
             <div className="new-expense__control">
               <label>Address</label>
               <input
                 type="text"
-                placeholder="Enter your address"
+                placeholder="Enter stn address"
                 onChange={handleChange}
-                name="custAddress"
+                name="stnAddress"
               ></input>
             </div>
 
             <div className="new-expense__control">
-              <label>Distance Travelled</label>
+              <label>Cycle Capacity</label>
               <input
                 type="number"
-                placeholder="Enter the distance Travelled"
                 onChange={handleChange}
-                name="distCycled"
+                name="cycCapacity"
               ></input>
             </div>
           </div>
@@ -111,4 +86,4 @@ function UpdateCustomerTable() {
   );
 }
 
-export default UpdateCustomerTable;
+export default UpdateStaionTable;

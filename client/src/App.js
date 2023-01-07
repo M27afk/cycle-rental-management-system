@@ -12,24 +12,37 @@ import CustomerTable from "./TablesForDataDisplaying/CustomerTable";
 import CycleTable from "./TablesForDataDisplaying/CycleTable";
 import EmployeeTable from "./TablesForDataDisplaying/EmployeeTable";
 import StationTable from "./TablesForDataDisplaying/StationTable";
-import ServiceTable from "./TablesForDataDisplaying/ServiceTable"
+import ServiceTable from "./TablesForDataDisplaying/ServiceTable";
 import UpdateCustomerTable from "./UpdateTables/UpdateCustomerTable";
 import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable";
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-    <Route path="/customer" element={< CustomerTable />} />
-    <Route path="/addcustomer" element={< CustomerDetailsForms />} />
-    <Route path="/customer/:id" element={< UpdateCustomerTable />} />
+      <Routes>
+        <Route path="/customer" element={<CustomerTable />} />
+        <Route path="/addcustomer" element={<CustomerDetailsForms />} />
+        <Route path="/customer/:id" element={<UpdateCustomerTable />} />
 
-    <Route path="/cycle" element={< CycleTable />} />
-    <Route path="/station" element={< StationTable />} />
-    <Route path="/employee" element={< EmployeeTable />} />
-    <Route path="/service" element={< ServiceTable />} />
-    <Route path="/tripdetails" element={< TripDetailTable />} />
+        <Route path="/cycle" element={<CycleTable />} />
+        <Route path="/addcycle" element={<CycleDetailsForms />} />
+        <Route path="/cycle/:id" element={<UpdateCycleTable />} />
 
-    </Routes>
+        <Route path="/employee" element={<EmployeeTable />} />
+        <Route path="/addemployee" element={<EmployeeDetailsForms />} />
+        <Route path="/employee/:id" element={<UpdateEmployeeTable />} />
+
+        <Route path="/tripdetails" element={<TripDetailsTable />} />
+        <Route path="/addtripdetails" element={<TripDetailsForms />} />
+        <Route path="/tripdetails/:id" element={<UpdateTripDetailsTable />} />
+
+        <Route path="/station" element={<StationTable />} />
+        <Route path="/addstation" element={<StationDetailsForms />} />
+        <Route path="/station/:id" element={<UpdateStationTable />} />
+
+        <Route path="/service" element={<ServiceTable />} />
+        <Route path="/addservice" element={<ServiceStationForms />} />
+        <Route path="/service/:id" element={<UpdateServiceTable />} />
+      </Routes>
     </BrowserRouter>
   );
 }

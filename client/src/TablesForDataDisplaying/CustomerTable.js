@@ -10,9 +10,9 @@ function CustomerTable() {
     const fetchContents = async () => {
       try {
         const res = await axios.get("http://localhost:8080/customer");
-      //  console.log(res.data);
+        //  console.log(res.data);
         setContent(res.data);
-    //    console.log(res);
+        //    console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -20,12 +20,11 @@ function CustomerTable() {
     fetchContents();
   }, []);
   const handleDelete = async (id) => {
-   
     try {
       await axios.delete("http://localhost:8080/customer/" + id);
-      console.log("called")
+      console.log("called");
       window.location.reload();
-    } catch (err){
+    } catch (err) {
       console.log(err);
     }
   };
@@ -55,13 +54,16 @@ function CustomerTable() {
               <td>{content.subscribedUpto}</td>
               <td>{content.distCycled}</td>
               <td>
-              <Link to={`/customer/${content.custID}`}> <button
-                  className="edit-delete-buttons"
-                  variant="tertiary"
-                  size="xs"
-                >
-                Update
-                </button>  </Link>
+                <Link to={`/customer/${content.custID}`}>
+                  {" "}
+                  <button
+                    className="edit-delete-buttons"
+                    variant="tertiary"
+                    size="xs"
+                  >
+                    Update
+                  </button>{" "}
+                </Link>
                 <button
                   className="edit-delete-buttons"
                   variant="tertiary"
