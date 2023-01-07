@@ -101,6 +101,23 @@ app.get("/employee",(req,res)=>{
 })
 
 //Customer
+app.get("/customer",(req,res)=>{
+    const q="Select * from customer;"
+    db.query(q,(err,data)=>{
+        //console.log(data)
+        if(err) return res.json(err)
+        else
+{
+    data.forEach(item => {
+        item.subscribedOn=item.subscribedOn.toLocaleDateString()
+        item.subscribedUpto=item.subscribedUpto.toLocaleDateString()
+        //console.log(item.subscribedOn)
+    });
+    //data.subscribedOn=(d.subscribedOn).toLocaleString()
+    
+        return res.send(data)}
+    })
+})
 app.post("/customer",(req,res)=>{
     const q="insert into customer (`custName`,`custAddress`,`subscriptionType`,`subscribedOn`) values (?) "
     const values=[
@@ -116,6 +133,40 @@ app.post("/customer",(req,res)=>{
     })
 })
 
+app.put("/customer/:id",(req,res)=>{
+   console.log(req.params)
+    const custID=req.params.id
+    console.log(custID)
+    const q="update customer set `custName`= ?, `custAddress`= ?, `subscriptionType`= ?, `subscribedOn`= ?, `distCycled`= ?  WHERE custID = ?";
+
+    const values=[
+        req.body.custName,
+        req.body.custAddress,
+        req.body.subscriptionType,
+        req.body.subscribedOn,
+        req.body.distCycled,
+    ]
+   
+    db.query(q,[...values,custID],(err,data)=>{
+        console.log("function called")
+
+        if(err)
+        return res.json(err)
+        else
+        return res.send("Customer with ID:"+custID+" Updated")
+    })
+})
+app.delete("/customer/:id",(req,res)=>{
+    const custID=req.params.id
+    console.log("called here")
+    const q=" delete from customer where custID = ? "
+    db.query(q,[custID],(err,data)=>{
+        if(err)
+        res.json(err)
+        else
+        res.send("Deleted Customer Successfully!")
+    })
+})
 //Cycle
 app.post("/cycle",(req,res)=>{
     const q="insert into cycle (`cycCondition`,`serviceDate`,`isGear`) values (?) "
