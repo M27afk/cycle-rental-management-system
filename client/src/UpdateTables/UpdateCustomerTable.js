@@ -6,16 +6,17 @@ import { useLocation, useNavigate } from "react-router";
 
 const options = ["Basic", "Premium"];
 function UpdateCustomerTable() {
+  const location = useLocation();
+const props=location.state
   const [custUpdatedData, setUpdatedData] = useState({
-    custName: "",
-    subscribedOn: "",
-    custAddress: "",
+    custName: props.custName,
+    subscribedOn: props.subscribedOn.split('/').reverse().join('/'),
+    custAddress: props.custAddress,
     subscriptionType: [options[0]],
-    distCycled: "",
+    distCycled: props.distCycled,
   });
 
   const [error, setError] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
 
   const custID = location.pathname.split("/")[2];
@@ -54,7 +55,7 @@ function UpdateCustomerTable() {
               <label>Full Name</label>
               <input
                 type="text"
-                placeholder="Enter your name"
+                placeholder={props.custName}
                 onChange={handleChange}
                 name="custName"
               ></input>
@@ -73,7 +74,7 @@ function UpdateCustomerTable() {
               <label>Subscription Type</label>
               <select
                 name="subscriptionType"
-                onChange={(event) => setUpdatedData(event.target.value)}
+                onChange={handleChange}
               >
                 {options.map((value) => (
                   <option value={value} key={value}>
@@ -86,7 +87,7 @@ function UpdateCustomerTable() {
               <label>Address</label>
               <input
                 type="text"
-                placeholder="Enter your address"
+                placeholder={props.custAddress}
                 onChange={handleChange}
                 name="custAddress"
               ></input>
@@ -96,7 +97,7 @@ function UpdateCustomerTable() {
               <label>Distance Travelled</label>
               <input
                 type="number"
-                placeholder="Enter the distance Travelled"
+                placeholder={props.distCycled}
                 onChange={handleChange}
                 name="distCycled"
               ></input>

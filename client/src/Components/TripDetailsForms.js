@@ -57,7 +57,7 @@ function TripDetailsForms() {
       endTime: enteredDate + ` ` + endEnterdTime + `:00`,
       distTravelled: enteredDistance,
     };
-    console.log(customerData.date);
+   // console.log(customerData.date);
 
     try {
       await axios.post("http://localhost:8080/tripdetails", customerData);

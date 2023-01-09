@@ -25,19 +25,19 @@ function ServiceStationForms() {
   };
   const submitHandler = async (event) => {
     event.preventDefault();
-    const customerData = {
+    const serviceDetails   = {
       empID: enteredEmpId,
       sparePartsCount: enteredSpare,
-      dueDate: new Date(enteredDate),
+      dueDate: enteredDate,
       cycID: enteredCycId,
     };
 
     try {
-      await axios.post("http://localhost:8080/service", customerData);
+      await axios.post("http://localhost:8080/service", serviceDetails);
     } catch (err) {
       console.log(err);
     }
-    console.log(customerData);
+    console.log(serviceDetails);
     setEnteredSpare("");
     setEnteredDate("");
   };

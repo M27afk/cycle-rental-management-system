@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 // data from "./MockData.json";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 function ServiceTable() {
   const [contents, setContent] = useState([]);
+  const navigate=useNavigate()
   useEffect(() => {
     const fetchContents = async () => {
       try {
@@ -21,6 +23,7 @@ function ServiceTable() {
   const handleDelete = async (id) => {
     try {
       await axios.delete("http://localhost:8080/service/" + id);
+      navigate("/service")
       console.log("called");
       window.location.reload();
     } catch (err) {
@@ -49,15 +52,14 @@ function ServiceTable() {
               <td>{content.sparePartsCount}</td>
               <td>{content.cycID}</td>
               <td>
-                <Link to={`/service/${content.serviceID}`}>
-                  {" "}
+                <Link to={`/service/${content.serviceID}`} state={content}>
                   <button
                     className="edit-delete-buttons"
                     variant="tertiary"
                     size="xs"
                   >
                     Update
-                  </button>{" "}
+                  </button>
                 </Link>
                 <button
                   className="edit-delete-buttons"
@@ -65,6 +67,7 @@ function ServiceTable() {
                   size="xs"
                   onClick={() => {
                     handleDelete(content.serviceID);
+
                   }}
                 >
                   Delete

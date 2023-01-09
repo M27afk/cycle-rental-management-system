@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router";
 
 function CustomerDetailsForms() {
   const [enteredName, setEnteredName] = useState("");
@@ -23,21 +24,24 @@ function CustomerDetailsForms() {
   const empChangeHandler = (event) => {
     setEnteredEmpId(event.target.value);
   };
+  const navigate=useNavigate()
   const submitHandler = async (event) => {
     event.preventDefault();
-    const customerData = {
+    const stnData = {
       stnName: enteredName,
       stnAddress: enteredAddress,
-      cycCpacity: enteredCycCpacity,
+      cycCapacity: enteredCycCpacity,
       empID: enteredEmpId,
     };
 
     try {
-      await axios.post("http://localhost:8080/station", customerData);
+      console.log(stnData)
+      await axios.post("http://localhost:8080/station", stnData);
+      navigate("/station")
     } catch (err) {
       console.log(err);
     }
-    console.log(customerData);
+    //console.log(customerData);
     setEnteredName("");
     setEnteredTAddress("");
   };
@@ -52,10 +56,10 @@ function CustomerDetailsForms() {
         <form onSubmit={submitHandler}>
           <div className="new-expense__controls">
             <div className="new-expense__control">
-              <label>Staion Name</label>
+              <label>Station Name</label>
               <input
                 type="text"
-                placeholder="Enter your name"
+                placeholder="Enter station name"
                 onChange={nameChangeHandler}
                 value={enteredName}
                 required
@@ -66,7 +70,7 @@ function CustomerDetailsForms() {
               <label>Address</label>
               <input
                 type="text"
-                placeholder="Enter your address"
+                placeholder="Enter address"
                 onChange={addressChangeHandler}
                 value={enteredAddress}
                 required

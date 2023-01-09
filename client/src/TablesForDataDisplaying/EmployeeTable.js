@@ -36,31 +36,33 @@ function EmployeeTable() {
             <th>Employee Name</th>
             <th>Employee Address</th>
             <th>Date of Birth</th>
-            <th>Staion ID</th>
+            <th>Station ID</th>
             <th>Service ID</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {contents.map((content) => (
+           
             <tr>
+               {console.log(content)}
               <td>{content.empID}</td>
               <td>{content.empName}</td>
               <td>{content.empAddress}</td>
               <td>{content.dob}</td>
-              <td>{content.stnID}</td>
-              <td>{content.servID}</td>
+              <td>{content.stnID===null?("-"):content.stnID}</td>
+              <td>{content.servID===null?("-"):content.servID}</td>
               <td>
                 <td>
-                  <Link to={`/employee/${content.empID}`}>
-                    {" "}
+                  <Link to={`/employee/${content.empID}`} state={content}>
+                    
                     <button
                       className="edit-delete-buttons"
                       variant="tertiary"
                       size="xs"
                     >
                       Update
-                    </button>{" "}
+                    </button>
                   </Link>
                   <button
                     className="edit-delete-buttons"

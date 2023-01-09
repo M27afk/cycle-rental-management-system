@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 // data from "./MockData.json";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 function StationTable() {
   const [contents, setContent] = useState([]);
@@ -27,6 +28,18 @@ function StationTable() {
       console.log(err);
     }
   };
+  // const handleUpdate = async (content) => {
+   
+  // <Link to={`/station/${content.stnID}`} state={content}> </Link>
+
+  //   // try {
+  //   //   await axios.delete("http://localhost:8080/station/" + id);
+  //   //   console.log("called");
+  //   //   window.location.reload();
+  //   // } catch (err) {
+  //   //   console.log(err);
+  //   // }
+  // };
   return (
     <div className="container">
       <table className="content-table">
@@ -49,16 +62,21 @@ function StationTable() {
               <td>{content.cycCapacity}</td>
               <td>{content.empID}</td>
               <td>
-                <Link to={`/station/${content.stnID}`}>
-                  {" "}
+                {/* <Link to={`/station/${content.stnID}`}> */
+                console.log(content)
+                }
+                  
+                <Link to={`/station/${content.stnID}`} state={content}> 
                   <button
                     className="edit-delete-buttons"
                     variant="tertiary"
                     size="xs"
+                  
                   >
                     Update
-                  </button>{" "}
+                  </button>
                 </Link>
+                
                 <button
                   className="edit-delete-buttons"
                   variant="tertiary"

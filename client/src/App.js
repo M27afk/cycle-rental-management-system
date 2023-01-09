@@ -14,7 +14,14 @@ import EmployeeTable from "./TablesForDataDisplaying/EmployeeTable";
 import StationTable from "./TablesForDataDisplaying/StationTable";
 import ServiceTable from "./TablesForDataDisplaying/ServiceTable";
 import UpdateCustomerTable from "./UpdateTables/UpdateCustomerTable";
-import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable";
+import UpdateCycleTable from "./UpdateTables/UpdateCycleTable"
+import UpdateEmployeeTable from "./UpdateTables/UpdateEmployeeTable"
+import UpdateServiceTable from "./UpdateTables/UpdateServiceTable"
+import UpdateStationTable from "./UpdateTables/UpdateStationTable"
+import UpdateTripDetailTable from "./UpdateTables/UpdateTripDetailTable"
+import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable"
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -31,9 +38,9 @@ function App() {
         <Route path="/addemployee" element={<EmployeeDetailsForms />} />
         <Route path="/employee/:id" element={<UpdateEmployeeTable />} />
 
-        <Route path="/tripdetails" element={<TripDetailsTable />} />
+        <Route path="/tripdetails" element={<TripDetailTable />} />
         <Route path="/addtripdetails" element={<TripDetailsForms />} />
-        <Route path="/tripdetails/:id" element={<UpdateTripDetailsTable />} />
+        <Route path="/tripdetails/:id" element={<UpdateTripDetailTable />} />
 
         <Route path="/station" element={<StationTable />} />
         <Route path="/addstation" element={<StationDetailsForms />} />

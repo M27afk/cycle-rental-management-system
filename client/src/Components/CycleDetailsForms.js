@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
 import axios from "axios"
-
+import { useNavigate } from "react-router";
 
 const options = ["Good", "Moderate","Poor"];
 const gearCheck = ["Yes", "No"];
@@ -27,6 +27,8 @@ function CycleDetailsForms() {
   //   setEnterSubscription(Number(event.target.value));
 
   // };
+
+  const navigate=useNavigate()
   const submitHandler =async (event) => {
     const value=(enteredIsGear==="Yes"?1:0)
     event.preventDefault();
@@ -38,6 +40,7 @@ function CycleDetailsForms() {
     console.log(customerData);
     try{
       await axios.post("http://localhost:8080/cycle",customerData)
+      navigate("/cycle")
     }catch(err){
       console.log(err)
     }

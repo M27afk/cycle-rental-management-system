@@ -4,34 +4,38 @@ import "./style.css";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 
-const options = ["Good", "Modrate", "Poor"];
-const isGearOption = ["yes", "No"];
+const options = ["Good", "Moderate", "Poor"];
+const isGearOption = ["No", "Yes"];
 
 function UpdateCycleTable() {
-  const [cycleUpdatedData, setUpdatedData] = useState({
-    distTravelled: "",
-    isGear: [isGearOption[0]],
-    ServiceDate: "",
-    CycCondition: [options[0]],
-  });
 
+  const location = useLocation()
+  const props=location.state
+
+ console.log(props)
+  const [cycleUpdatedData, setUpdatedData] = useState({
+    distTravelled: props.distTravelled,
+    isGear: isGearOption[0],
+    serviceDate: props.serviceDate.split("/").reverse().join("/"),
+    cycCondition: options[0],
+  });
+console.log(cycleUpdatedData)
   const [error, setError] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
 
   const cycID = location.pathname.split("/")[2];
 
   const handleChange = (e) => {
     setUpdatedData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(cycleUpdatedData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       console.log(cycleUpdatedData);
+
       await axios.put(
-        `http://localhost:8080/customer/${cycID}`,
+        `http://localhost:8080/cycle/${cycID}`,
         cycleUpdatedData
       );
       console.log("Axios called");
@@ -55,7 +59,7 @@ function UpdateCycleTable() {
               <label>Distance Travelled</label>
               <input
                 type="number"
-                placeholder="Enter dist travelled"
+                placeholder={props.distTravelled}
                 onChange={handleChange}
                 name="distTravelled"
               ></input>
@@ -66,15 +70,15 @@ function UpdateCycleTable() {
               <input
                 type="date"
                 onChange={handleChange}
-                name="ServiceDate"
+                name="serviceDate"
               ></input>
             </div>
 
             <div className="new-expense__control">
               <label>Cycle Condition</label>
               <select
-                name="CycCondition"
-                onChange={(event) => setUpdatedData(event.target.value)}
+                name="cycCondition"
+                onChange={handleChange}
               >
                 {options.map((value) => (
                   <option value={value} key={value}>
@@ -87,7 +91,7 @@ function UpdateCycleTable() {
               <label>Is Gear</label>
               <select
                 name="isGear"
-                onChange={(event) => setUpdatedData(event.target.value)}
+                onChange={handleChange}
               >
                 {isGearOption.map((value) => (
                   <option value={value} key={value}>

@@ -5,15 +5,17 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 
 function UpdateEmployeeTable() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const props=location.state
   const [employeeUpdatedData, setUpdatedData] = useState({
-    empName: "",
-    dob: "",
-    empAddress: "",
+    empName: props.empName,
+    dob: props.dob.split('/').reverse().join('/'),
+    empAddress: props.empAddress,
   });
 
   const [error, setError] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
+
 
   const empID = location.pathname.split("/")[2];
 
@@ -51,7 +53,7 @@ function UpdateEmployeeTable() {
               <label>Full Name</label>
               <input
                 type="text"
-                placeholder="Enter your name"
+                placeholder={employeeUpdatedData.empName}
                 onChange={handleChange}
                 name="empName"
               ></input>
@@ -61,7 +63,7 @@ function UpdateEmployeeTable() {
               <label>Address</label>
               <input
                 type="text"
-                placeholder="Enter your address"
+                placeholder={employeeUpdatedData.empAddress}
                 onChange={handleChange}
                 name="empAddress"
               ></input>

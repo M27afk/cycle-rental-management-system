@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
+
 // data from "./MockData.json";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function TripDetailTable() {
   const [contents, setContent] = useState([]);
@@ -11,7 +13,7 @@ function TripDetailTable() {
         const res = await axios.get("http://localhost:8080/tripdetails");
         console.log(res.data);
         setContent(res.data);
-        console.log(res);
+        console.log(res.data);
       } catch (err) {
         console.log(err);
       }

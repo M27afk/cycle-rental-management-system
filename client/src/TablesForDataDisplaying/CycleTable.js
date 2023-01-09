@@ -10,9 +10,9 @@ function CycleTable() {
     const fetchContents = async () => {
       try {
         const res = await axios.get("http://localhost:8080/cycle");
-        console.log(res.data);
+      //  console.log(res.data);
         setContent(res.data);
-        console.log(res);
+        //console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -21,6 +21,7 @@ function CycleTable() {
   }, []);
   const handleDelete = async (id) => {
     try {
+      console.log(id)
       await axios.delete("http://localhost:8080/cycle/" + id);
       console.log("called");
       window.location.reload();
@@ -45,14 +46,14 @@ function CycleTable() {
         <tbody>
           {contents.map((content) => (
             <tr>
-              <td>{content.cycID}</td>
+              <td>{content.cycleID}</td>
               <td>{content.distTravelled}</td>
               <td>{content.isGear ? "Yes" : "No"}</td>
               <td>{content.serviceDate}</td>
               <td>{content.cycCondition}</td>
               <td>{content.serviceID}</td>
               <td>
-                <Link to={`/cycle/${content.cycID}`}>
+                <Link to={`/cycle/${content.cycleID}`} state={content}>
                   <button
                     className="edit-delete-buttons"
                     variant="tertiary"
@@ -66,7 +67,7 @@ function CycleTable() {
                   variant="tertiary"
                   size="xs"
                   onClick={() => {
-                    handleDelete(content.cycID);
+                    handleDelete(content.cycleID);
                   }}
                 >
                   Delete

@@ -4,22 +4,24 @@ import "./style.css";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 
-function UpdateStaionTable() {
+function UpdateStaionTable() {  
+  const location = useLocation()
+  const props=location.state
+  //console.log(props)
   const [stationUpdatedData, setUpdatedData] = useState({
-    stnName: "",
-    stnAddress: "",
-    cycCapacity: "",
-    empID: "",
+    stnName:props.stnName,
+    stnAddress: props.stnAddress,
+    cycCapacity: props.cycCapacity,
+    empID: props.empID,
   });
 
   const [error, setError] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
 
   const stnID = location.pathname.split("/")[2];
 
   const handleChange = (e) => {
-    setUpdatedData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setUpdatedData((prev) => ({ ...prev, [e.target.name]: e.target.value}));
     console.log(stationUpdatedData);
   };
 
@@ -43,7 +45,6 @@ function UpdateStaionTable() {
       <div className="new-expense">
         <div className="login-header">
           <header className="titles">Station Details Updation Form</header>
-          {/* <img src="img/trin.png" alt="trin trin logo" className="trin-img" /> */}
         </div>
 
         <form>
@@ -52,7 +53,7 @@ function UpdateStaionTable() {
               <label>Station Name</label>
               <input
                 type="text"
-                placeholder="Enter stn name"
+                placeholder={props.stnName}
                 onChange={handleChange}
                 name="stnName"
               ></input>
@@ -62,7 +63,7 @@ function UpdateStaionTable() {
               <label>Address</label>
               <input
                 type="text"
-                placeholder="Enter stn address"
+                placeholder={props.stnAddress}
                 onChange={handleChange}
                 name="stnAddress"
               ></input>
@@ -73,7 +74,17 @@ function UpdateStaionTable() {
               <input
                 type="number"
                 onChange={handleChange}
-                name="cycCapacity"
+                placeholder={props.cycCapacity}
+                 name="cycCapacity"
+              ></input>
+            </div>
+            <div className="new-expense__control">
+              <label>Employee ID</label>
+              <input
+                type="number"
+                onChange={handleChange}
+                placeholder={props.empID}
+                name="empID"
               ></input>
             </div>
           </div>

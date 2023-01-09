@@ -5,17 +5,20 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 
 const options = ["Basic", "Premium"];
-function UpdateCustomerTable() {
+export default function UpdateServiceTable() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const props=location.state
   const [serviceUpdatedData, setUpdatedData] = useState({
-    empID: "",
-    dueDate: "",
-    sparePartsCount: "",
-    cycID: "",
+    empID: props.empID,
+    dueDate: props.dueDate.split("/").reverse().join("/"),
+    sparePartsCount: props.sparePartsCount,
+    cycID: props.cycID,
   });
 
   const [error, setError] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
+ 
 
   const serviceID = location.pathname.split("/")[2];
 
@@ -53,7 +56,7 @@ function UpdateCustomerTable() {
               <label>Employee ID</label>
               <input
                 type="number"
-                placeholder="Enter the Id"
+                placeholder={props.empID}
                 onChange={handleChange}
                 name="empID"
               ></input>
@@ -67,7 +70,7 @@ function UpdateCustomerTable() {
               <label>Spare Parts Count</label>
               <input
                 type="number"
-                placeholder="Enter the Count"
+                placeholder={props.sparePartsCount}
                 onChange={handleChange}
                 name="sparePartsCount"
               ></input>
@@ -77,7 +80,7 @@ function UpdateCustomerTable() {
               <label>Cycle ID</label>
               <input
                 type="number"
-                placeholder="Enter the Id"
+                placeholder={props.cycID}
                 onChange={handleChange}
                 name="cycID"
               ></input>
@@ -92,4 +95,4 @@ function UpdateCustomerTable() {
   );
 }
 
-export default UpdateCustomerTable;
+//export default UpdateServiceTable;
