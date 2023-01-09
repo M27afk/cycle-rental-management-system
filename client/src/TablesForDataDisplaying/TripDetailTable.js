@@ -37,10 +37,10 @@ function TripDetailTable() {
             <th>Trip ID</th>
             <th>Customer ID</th>
             <th>Cycle ID</th>
-            <th>Staion ID start</th>
-            <th>Staion ID start</th>
+            <th>Start Station</th>
+            <th>End Station</th>
             <th>Distance Travelled</th>
-            <th>BeginTime</th>
+            <th>Begin Time</th>
             <th>End Time</th>
             <th>Actions</th>
           </tr>
@@ -57,7 +57,8 @@ function TripDetailTable() {
               <td>{content.beginTime}</td>
               <td>{content.endTime}</td>
               <td>
-                <Link to={`/tripdetails/${content.tripID}`}>
+                <div className="buttonContainer">
+                <Link to={`/tripdetails/${content.tripID}`} state={content}>
                   {" "}
                   <button
                     className="edit-delete-buttons"
@@ -77,6 +78,7 @@ function TripDetailTable() {
                 >
                   Delete
                 </button>
+                </div>
               </td>
             </tr>
           ))}

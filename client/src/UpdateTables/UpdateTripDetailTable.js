@@ -5,16 +5,18 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 
 function UpdateTripDetailTable() {
+  const location = useLocation();
+  const props=location.state
+  console.log(props.beginTime)
   const [tripUpdatedData, setUpdatedData] = useState({
-    stnID_start: "",
-    stnID_end: "",
-    distTravelled: "",
-    beginTime: "",
-    endTime: "",
+    stnID_start: props.stnID_start,
+    stnID_end: props.stnID_end,
+    distTravelled: props.distTravelled,
+    beginTime: props.beginTime,
+    endTime: props.endTime,
   });
 
   const [error, setError] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
 
   const tripID = location.pathname.split("/")[2];
@@ -53,7 +55,7 @@ function UpdateTripDetailTable() {
               <label>Station ID start</label>
               <input
                 type="number"
-                placeholder="Enter the distance Travelled"
+                placeholder={props.stnID_start}
                 onChange={handleChange}
                 name="stnID_start"
               ></input>
@@ -63,7 +65,7 @@ function UpdateTripDetailTable() {
               <label>Station ID end</label>
               <input
                 type="number"
-                placeholder="Enter the distance Travelled"
+                placeholder={props.stnID_end}
                 onChange={handleChange}
                 name="stnID_end"
               ></input>
@@ -72,7 +74,7 @@ function UpdateTripDetailTable() {
               <label>Distance Travelled</label>
               <input
                 type="number"
-                placeholder="Enter the distance Travelled"
+                placeholder={props.distTravelled}
                 onChange={handleChange}
                 name="distTravelled"
               ></input>

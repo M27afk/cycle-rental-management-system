@@ -329,7 +329,9 @@ app.get("/tripdetails",(req,res)=>{
 
     db.query(q,(err,data)=>{
      data.forEach(item => {
-             item.beginTime=item.beginTime.toLocaleDateString()
+             item.beginTime=item.beginTime.toLocaleDateString()+" "+item.beginTime.toLocaleTimeString()
+             item.endTime=item.endTime.toLocaleDateString()+" "+item.endTime.toLocaleTimeString()
+
          });
         if(err) return res.json(err)
         else
@@ -357,7 +359,37 @@ app.post("/tripdetails",(req,res)=>{
     })
 })
 
+app.put("/tripdetails/:id",(req,res)=>{
+    const q="update tripdetails set `stnID_start`=?,`stnID_end`=?,`cycID`=?,`custID`=?,`distTravelled`=?,`beginTime`=?,`endTime`=? where tripID=? "
+    const values=[
+        req.body.stnID_start,
+        req.body.stnID_end,
+        req.body.cycID,
+        req.body.custID,
+        req.body.distTravelled,
+        req.body.beginTime,
+        req.body.endTime
+    ]
+    console.log(values)
+    db.query(q,[...values,req.params.id],(err,data)=>{
+        if(err)
+         console.log( res.json(err))
+        else
+             res.send("Tripdetails updated successfully!")
+    })
+})
 
+app.delete("/tripdetails/:id",(req,res)=>{
+    const stnID=req.params.id
+    // console.log("called here")
+    const q=" delete from tripdetails where tripID = ? "
+    db.query(q,[stnID],(err,data)=>{
+        if(err)
+        res.json(err)
+        else
+        res.send("Deleted Trip Detail Successfully!")
+    })
+})
 app.listen(8080,()=>{
     console.log("Listening on port 8080")
 })

@@ -36,3 +36,22 @@
 .content-table tbody tr:last-of-type {
   border-bottom: 5px solid #40005d;
 }
+.buttonContainer{
+  display: flex;
+  flex-direction:column;
+justify-content: left;
+}
+.edit-delete-buttons{
+  background-color: #40005d;
+  color: white;
+  padding:5px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin: 2px 0;
+}
+.edit-delete-buttons:hover{
+  cursor:pointer;
+  background-color: white;
+  color: #40005d;
+  transition: all 0.2s ease;
+}
