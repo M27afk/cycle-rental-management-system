@@ -10,9 +10,9 @@ function StationTable() {
     const fetchContents = async () => {
       try {
         const res = await axios.get("http://localhost:8080/station");
-        console.log(res.data);
+        //console.log(res.data);
         setContent(res.data);
-        console.log(res);
+        //console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -21,8 +21,9 @@ function StationTable() {
   }, []);
   const handleDelete = async (id) => {
     try {
-      await axios.delete("http://localhost:8080/station/" + id);
-      console.log("called");
+      const res=await axios.delete("http://localhost:8080/station/" + id);
+      if(res.data.errno)
+      alert (res.data.sqlMessage)
       window.location.reload();
     } catch (err) {
       console.log(err);
@@ -63,7 +64,7 @@ function StationTable() {
               <td>{content.empID}</td>
               <td>
                 {/* <Link to={`/station/${content.stnID}`}> */
-                console.log(content)
+               // ce.log(content)
                 }
                 <div className="buttonContainer">
                 <Link to={`/station/${content.stnID}`} state={content}> 

@@ -30,10 +30,12 @@ function UpdateTripDetailTable() {
     e.preventDefault();
     try {
       console.log(tripUpdatedData);
-      await axios.put(
+      const res =await axios.put(
         `http://localhost:8080/tripdetails/${tripID}`,
         tripUpdatedData
-      );
+      )      
+      if(res.data.errno)
+      alert (res.data.sqlMessage)
       console.log("Axios called");
       navigate("/tripdetails");
     } catch (err) {

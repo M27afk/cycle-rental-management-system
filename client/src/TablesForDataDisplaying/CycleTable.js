@@ -11,6 +11,9 @@ function CycleTable() {
       try {
         const res = await axios.get("http://localhost:8080/cycle");
       //  console.log(res.data);
+      if(res.data.errno)
+      alert (res.data.sqlMessage)
+      
         setContent(res.data);
         //console.log(res);
       } catch (err) {

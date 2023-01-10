@@ -29,7 +29,9 @@ function EmployeeDetailsForms() {
     };
     console.log(customerData);
     try{
-      await axios.post("http://localhost:8080/employee",customerData)
+    const res=  await axios.post("http://localhost:8080/employee",customerData)
+    if(res.data.errno)
+    alert (res.data.sqlMessage)
     }catch(err){
       console.log(err)
     }

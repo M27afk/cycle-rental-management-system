@@ -42,7 +42,9 @@ function CustomerDetailsForms() {
     //console.log(customerData.subscribedOn);
 
     try {
-      await axios.post("http://localhost:8080/customer", customerData);
+      const res=await axios.post("http://localhost:8080/customer", customerData);
+      if(res.data.errno)
+      alert (res.data.sqlMessage)
       navigate("/customer")
     } catch (err) {
       console.log(err);

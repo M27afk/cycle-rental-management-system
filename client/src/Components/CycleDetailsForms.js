@@ -39,7 +39,9 @@ function CycleDetailsForms() {
     };
     console.log(customerData);
     try{
-      await axios.post("http://localhost:8080/cycle",customerData)
+      const res= await axios.post("http://localhost:8080/cycle",customerData)
+      console.log(res.request.status)
+
       navigate("/cycle")
     }catch(err){
       console.log(err)

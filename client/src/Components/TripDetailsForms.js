@@ -60,7 +60,9 @@ function TripDetailsForms() {
    // console.log(customerData.date);
 
     try {
-      await axios.post("http://localhost:8080/tripdetails", customerData);
+     const res= await axios.post("http://localhost:8080/tripdetails", customerData);
+     if(res.data.errno)
+     alert (res.data.sqlMessage)
     } catch (err) {
       console.log(err);
     }
@@ -140,7 +142,7 @@ function TripDetailsForms() {
             </div>
 
             <div className="new-expense__control">
-              <label>Staion ID Start</label>
+              <label>Station ID Start</label>
               <input
                 type="number"
                 onChange={startStationIdChangeHandler}
@@ -150,7 +152,7 @@ function TripDetailsForms() {
             </div>
 
             <div className="new-expense__control">
-              <label>Staion ID End</label>
+              <label>Station ID End</label>
               <input
                 type="number"
                 onChange={endStationIdChangeHandler}

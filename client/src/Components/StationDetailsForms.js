@@ -35,8 +35,11 @@ function CustomerDetailsForms() {
     };
 
     try {
-      console.log(stnData)
-      await axios.post("http://localhost:8080/station", stnData);
+     // console.log(stnData)
+      const res=  await axios.post("http://localhost:8080/station", stnData)
+      if(res.data.errno)
+      alert (res.data.sqlMessage)
+
       navigate("/station")
     } catch (err) {
       console.log(err);

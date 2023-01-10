@@ -87,7 +87,8 @@ app.put("/station/:id", (req, res) => {
     req.body.empID,
   ];
   db.query(q, [...values, stnID], (err, data) => {
-    if (err) return res.json(err);
+    
+    if (err) return res.status(400).send("Error");
     else return res.send("Station Updated");
   });
 });
@@ -393,4 +394,32 @@ app.listen(8080, () => {
 
 custapp.listen(7000, () => {
   console.log("Listening Customer on 7000");
+});
+
+custapp.get("/custview", (req, res) => {
+  const q = "Select * from customerView;";
+
+  db1.query(q, (err, data) => {
+    if (err) return res.json(err);
+    else return res.send(data);
+  });
+});
+
+custapp.get("/stationview", (req, res) => {
+  const q = "Select * from stations;";
+
+  db1.query(q, (err, data) => {
+    if (err) return res.json(err);
+    else return res.send(data);
+  });
+});
+
+custapp.get("/cycle", (req, res) => {
+  const q = "Select * from customer;";
+
+
+  db1.query(q, (err, data) => {
+    if (err) return res.json(err);
+    else return res.send(data);
+  });
 });

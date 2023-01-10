@@ -33,7 +33,9 @@ function ServiceStationForms() {
     };
 
     try {
-      await axios.post("http://localhost:8080/service", serviceDetails);
+      const res= await axios.post("http://localhost:8080/service", serviceDetails);
+      if(res.data.errno)
+      alert (res.data.sqlMessage)
     } catch (err) {
       console.log(err);
     }
