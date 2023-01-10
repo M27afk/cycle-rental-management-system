@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Switch from "react-switch";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import CustomerDetailsForms from "./Components/CustomerDetailsForms";
 import CycleDetailsForms from "./Components/CycleDetailsForms";
@@ -13,46 +14,40 @@ import CycleTable from "./TablesForDataDisplaying/CycleTable";
 import EmployeeTable from "./TablesForDataDisplaying/EmployeeTable";
 import StationTable from "./TablesForDataDisplaying/StationTable";
 import ServiceTable from "./TablesForDataDisplaying/ServiceTable";
+import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable";
 import UpdateCustomerTable from "./UpdateTables/UpdateCustomerTable";
-import UpdateCycleTable from "./UpdateTables/UpdateCycleTable"
-import UpdateEmployeeTable from "./UpdateTables/UpdateEmployeeTable"
-import UpdateServiceTable from "./UpdateTables/UpdateServiceTable"
-import UpdateStationTable from "./UpdateTables/UpdateStationTable"
-import UpdateTripDetailTable from "./UpdateTables/UpdateTripDetailTable"
-import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable"
-import Home from "./Home";
+import UpdateCycleTable from "./UpdateTables/UpdateCycleTable";
+import UpdateEmployeeTable from "./UpdateTables/UpdateEmployeeTable";
+import UpdateServiceTable from "./UpdateTables/UpdateServiceTable";
+import UpdateStationTable from "./UpdateTables/UpdateStationTable";
+import UpdateTripDetailTable from "./UpdateTables/UpdateTripDetailTable";
+
+// import Home from "./Home";
+import Navbar from "./Menu/Navbar";
+// import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-      <Route path="/" element={<Home />} />
+    <Router>
+      <Navbar />
 
-        <Route path="/customer" element={<CustomerTable />} />
-        <Route path="/addcustomer" element={<CustomerDetailsForms />} />
-        <Route path="/customer/:id" element={<UpdateCustomerTable />} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/CustomerDetailsForms" component={CustomerDetailsForms} />
+        <Route path="/CycleDetailsForms" component={CycleDetailsForms} />
+        <Route path="/ServiceStationForms" component={ServiceStationForms} />
+        <Route path="/StationDetailsForms" component={StationDetailsForms} />
+        <Route path="/EmployeeDetailsForms" component={EmployeeDetailsForms} />
+        <Route path="/TripDetailsForms" component={TripDetailsForms} />
 
-        <Route path="/cycle" element={<CycleTable />} />
-        <Route path="/addcycle" element={<CycleDetailsForms />} />
-        <Route path="/cycle/:id" element={<UpdateCycleTable />} />
-
-        <Route path="/employee" element={<EmployeeTable />} />
-        <Route path="/addemployee" element={<EmployeeDetailsForms />} />
-        <Route path="/employee/:id" element={<UpdateEmployeeTable />} />
-
-        <Route path="/tripdetails" element={<TripDetailTable />} />
-        <Route path="/addtripdetails" element={<TripDetailsForms />} />
-        <Route path="/tripdetails/:id" element={<UpdateTripDetailTable />} />
-
-        <Route path="/station" element={<StationTable />} />
-        <Route path="/addstation" element={<StationDetailsForms />} />
-        <Route path="/station/:id" element={<UpdateStationTable />} />
-
-        <Route path="/service" element={<ServiceTable />} />
-        <Route path="/addservice" element={<ServiceStationForms />} />
-        <Route path="/service/:id" element={<UpdateServiceTable />} />
-      </Routes>
-    </BrowserRouter>
+        <Route path="/UpdateCustomerTable" component={CustomerTable} />
+        <Route path="/UpdateCycleTable" component={CycleTable} />
+        <Route path="/UpdateEmployeeTable" component={EmployeeTable} />
+        <Route path="/UpdateServiceTable" component={ServiceTable} />
+        <Route path="/UpdateStationTable" component={StationTable} />
+        <Route path="/UpdateTripDetailTable" component={TripDetailTable} />
+      </Switch>
+    </Router>
   );
 }
 
