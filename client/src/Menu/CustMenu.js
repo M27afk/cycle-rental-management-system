@@ -1,12 +1,13 @@
 export const MenuItems = [
   {
     title: "Insert Data",
-    path: "/CustomerDetailsForms",
+    path: "/addcustomer",
     cName: "dropdown-link",
   },
   {
     title: "Table Data",
-    path: "/CustomerTable",
+    path: "/customer",
     cName: "dropdown-link",
   },
 ];
+
