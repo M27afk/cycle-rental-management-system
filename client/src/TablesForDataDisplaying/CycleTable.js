@@ -53,6 +53,7 @@ function CycleTable() {
               <td>{content.cycCondition}</td>
               <td>{content.serviceID}</td>
               <td>
+              <div className="buttonContainer">
                 <Link to={`/cycle/${content.cycleID}`} state={content}>
                   <button
                     className="edit-delete-buttons"
@@ -72,6 +73,7 @@ function CycleTable() {
                 >
                   Delete
                 </button>
+                </div>
               </td>
             </tr>
           ))}

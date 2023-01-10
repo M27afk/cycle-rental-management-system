@@ -54,6 +54,7 @@ function EmployeeTable() {
               <td>{content.servID===null?("-"):content.servID}</td>
               <td>
                 <td>
+                <div className="buttonContainer">
                   <Link to={`/employee/${content.empID}`} state={content}>
                     
                     <button
@@ -74,6 +75,7 @@ function EmployeeTable() {
                   >
                     Delete
                   </button>
+                </div>
                 </td>
               </td>
             </tr>

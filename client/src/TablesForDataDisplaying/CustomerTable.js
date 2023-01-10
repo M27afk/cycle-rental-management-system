@@ -54,6 +54,7 @@ function CustomerTable() {
               <td>{content.subscribedUpto}</td>
               <td>{content.distCycled}</td>
               <td>
+              <div className="buttonContainer">
                 <Link to={`/customer/${content.custID}`} state={content}>
                   {" "}
                   <button
@@ -74,6 +75,7 @@ function CustomerTable() {
                 >
                   Delete
                 </button>
+              </div>
               </td>
             </tr>
           ))}

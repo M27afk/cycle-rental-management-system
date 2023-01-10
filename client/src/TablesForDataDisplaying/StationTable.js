@@ -65,7 +65,7 @@ function StationTable() {
                 {/* <Link to={`/station/${content.stnID}`}> */
                 console.log(content)
                 }
-                  
+                <div className="buttonContainer">
                 <Link to={`/station/${content.stnID}`} state={content}> 
                   <button
                     className="edit-delete-buttons"
@@ -87,6 +87,7 @@ function StationTable() {
                 >
                   Delete
                 </button>
+                </div>
               </td>
             </tr>
           ))}

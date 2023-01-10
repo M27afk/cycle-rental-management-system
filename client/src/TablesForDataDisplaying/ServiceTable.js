@@ -52,6 +52,7 @@ function ServiceTable() {
               <td>{content.sparePartsCount}</td>
               <td>{content.cycID}</td>
               <td>
+              <div className="buttonContainer">
                 <Link to={`/service/${content.serviceID}`} state={content}>
                   <button
                     className="edit-delete-buttons"
@@ -72,6 +73,7 @@ function ServiceTable() {
                 >
                   Delete
                 </button>
+                </div>
               </td>
             </tr>
           ))}

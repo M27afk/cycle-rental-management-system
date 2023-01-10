@@ -2,394 +2,395 @@ import express from "express";
 import mysql from "mysql";
 import cors from "cors";
 
-const app=express()
+const app = express();
 app.use(express.json());
 app.use(cors());
 
-const db=mysql.createConnection(
-    {
-        host:"localhost",
-        user:"dbproject",
-        password:"Dbms#12",
-        database:"cyc2",
-    }
-);
-db.connect((err)=>{
-if(err) console.log(err)
+const custapp = express();
+custapp.use(express.json());
+custapp.use(cors());
 
-console.log("Database connected")
-})
-app.get("/",(req,res)=>{
-    res.send("Hello")
-})
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "dbproject",
+  password: "Dbms#12",
+  database: "cyc2",
+});
+
+const db1 = mysql.createConnection({
+  host: "localhost",
+  user: "cycleCustomer",
+  password: "customer123",
+  database: "cyc2",
+});
+db.connect((err) => {
+  if (err) console.log(err);
+
+  console.log("Admin Database connected");
+});
+
+db1.connect((err) => {
+  if (err) console.log(err);
+
+  console.log("Customer Database connected");
+});
+
+custapp.get("/", (req, res) => {
+  res.send("Hello Customer");
+});
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 
 //General Query
-app.get("/query",(req,res)=>{
-    console.log(req.body.query)
-    const q=req.body.query
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send(data)
-    })
-})
+app.get("/query", (req, res) => {
+  console.log(req.body.query);
+  const q = req.body.query;
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    else return res.send(data);
+  });
+});
 
 //Station
-app.get("/station",(req,res)=>{
-    const q="Select * from station;"
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send(data)
-    })
-})
+app.get("/station", (req, res) => {
+  const q = "Select * from station;";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    else return res.send(data);
+  });
+});
 
-app.post("/station",(req,res)=>{
-    const q="insert into station (`stnName`,`stnAddress`,`cycCapacity`,`empID`) values (?) "
-    const values=[
-        req.body.stnName,
-        req.body.stnAddress,
-        req.body.cycCapacity,
-        req.body.empID,
-    ]
-    db.query(q,[values],(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send("Station Created")
-    })
-})
+app.post("/station", (req, res) => {
+  const q =
+    "insert into station (`stnName`,`stnAddress`,`cycCapacity`,`empID`) values (?) ";
+  const values = [
+    req.body.stnName,
+    req.body.stnAddress,
+    req.body.cycCapacity,
+    req.body.empID,
+  ];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    else return res.send("Station Created");
+  });
+});
 
-app.put("/station/:id",(req,res)=>{
-    const stnID=req.params.id
-    const q="update station set `stnName`=?,`stnAddress`=?,`cycCapacity`=?,`empID`=? where stnID=? "
-    const values=[
-        req.body.stnName,
-        req.body.stnAddress,
-        req.body.cycCapacity,
-        req.body.empID,
-    ]
-    db.query(q,[...values,stnID],(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send("Station Updated")
-    })
-})
+app.put("/station/:id", (req, res) => {
+  const stnID = req.params.id;
+  const q =
+    "update station set `stnName`=?,`stnAddress`=?,`cycCapacity`=?,`empID`=? where stnID=? ";
+  const values = [
+    req.body.stnName,
+    req.body.stnAddress,
+    req.body.cycCapacity,
+    req.body.empID,
+  ];
+  db.query(q, [...values, stnID], (err, data) => {
+    if (err) return res.json(err);
+    else return res.send("Station Updated");
+  });
+});
 
-app.delete("/station/:id",(req,res)=>{
-    const stnID=req.params.id
-    // console.log("called here")
-    const q=" delete from station where stnID = ? "
-    db.query(q,[stnID],(err,data)=>{
-        if(err)
-        res.json(err)
-        else
-        res.send("Deleted Station Successfully!")
-    })
-})
+app.delete("/station/:id", (req, res) => {
+  const stnID = req.params.id;
+  // console.log("called here")
+  const q = " delete from station where stnID = ? ";
+  db.query(q, [stnID], (err, data) => {
+    if (err) res.json(err);
+    else res.send("Deleted Station Successfully!");
+  });
+});
 
 //Employee
-app.post("/employee",(req,res)=>{
-    const q="insert into employee (`empName`,`empAddress`,`dob`,`stnID`,`servID`) values (?) "
-    const values=[
-        req.body.empName,
-        req.body.empAddress,
-        req.body.dob,
-        req.body.stnID,
-        req.body.servID,
-    ]
-    db.query(q,[values],(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send("Employee Created")
-    })
-})
+app.post("/employee", (req, res) => {
+  const q =
+    "insert into employee (`empName`,`empAddress`,`dob`,`stnID`,`servID`) values (?) ";
+  const values = [
+    req.body.empName,
+    req.body.empAddress,
+    req.body.dob,
+    req.body.stnID,
+    req.body.servID,
+  ];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    else return res.send("Employee Created");
+  });
+});
 
-app.get("/employee",(req,res)=>{
-    const q="Select * from employee;"
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        else{
-        data.forEach(item => {
-            item.dob=item.dob.toLocaleDateString()
-        })
-        return res.send(data)
+app.get("/employee", (req, res) => {
+  const q = "Select * from employee;";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    else {
+      data.forEach((item) => {
+        item.dob = item.dob.toLocaleDateString();
+      });
+      return res.send(data);
     }
-    })
-})
+  });
+});
 
-app.put("/employee/:id",(req,res)=>{
-    const q="update employee set `empName`=?,`empAddress`=?,`dob`=? where empID=? "
-    const values=[
-        req.body.empName,
-        req.body.empAddress,
-        req.body.dob
-    ]
-    db.query(q,[...values,req.params.id],(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send("Employee Updated")
-    })
-})
-app.delete("/employee/:id",(req,res)=>{
-
-    const q="delete from employee where empID=?;"
-    db.query(q,[req.params.id],(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send("Employee deleted")
-    })
-})
+app.put("/employee/:id", (req, res) => {
+  const q =
+    "update employee set `empName`=?,`empAddress`=?,`dob`=? where empID=? ";
+  const values = [req.body.empName, req.body.empAddress, req.body.dob];
+  db.query(q, [...values, req.params.id], (err, data) => {
+    if (err) return res.json(err);
+    else return res.send("Employee Updated");
+  });
+});
+app.delete("/employee/:id", (req, res) => {
+  const q = "delete from employee where empID=?;";
+  db.query(q, [req.params.id], (err, data) => {
+    if (err) return res.json(err);
+    else return res.send("Employee deleted");
+  });
+});
 //Customer
-app.get("/customer",(req,res)=>{
-    const q="Select * from customer;"
-    db.query(q,(err,data)=>{
-        //console.log(data)
-        if(err) return res.json(err)
-        else
-{
-    data.forEach(item => {
-        item.subscribedOn=item.subscribedOn.toLocaleDateString()
-        item.subscribedUpto=item.subscribedUpto.toLocaleDateString()
+app.get("/customer", (req, res) => {
+  const q = "Select * from customer;";
+  db.query(q, (err, data) => {
+    //console.log(data)
+    if (err) return res.json(err);
+    else {
+      data.forEach((item) => {
+        item.subscribedOn = item.subscribedOn.toLocaleDateString();
+        item.subscribedUpto = item.subscribedUpto.toLocaleDateString();
         //console.log(item.subscribedOn)
-    });
-    //data.subscribedOn=(d.subscribedOn).toLocaleString()
-    
-        return res.send(data)}
-    })
-})
-app.post("/customer",(req,res)=>{
-    const q="insert into customer (`custName`,`custAddress`,`subscriptionType`,`subscribedOn`) values (?) "
-    const values=[
-        req.body.custName,
-        req.body.custAddress,
-        req.body.subscriptionType,
-        req.body.subscribedOn,
-    ]
-    db.query(q,[values],(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send("Customer Created")
-    })
-})
+      });
+      //data.subscribedOn=(d.subscribedOn).toLocaleString()
 
-app.put("/customer/:id",(req,res)=>{
+      return res.send(data);
+    }
+  });
+});
+app.post("/customer", (req, res) => {
+  const q =
+    "insert into customer (`custName`,`custAddress`,`subscriptionType`,`subscribedOn`) values (?) ";
+  const values = [
+    req.body.custName,
+    req.body.custAddress,
+    req.body.subscriptionType,
+    req.body.subscribedOn,
+  ];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    else return res.send("Customer Created");
+  });
+});
+
+app.put("/customer/:id", (req, res) => {
   // console.log(req.params)
-    const custID=req.params.id
+  const custID = req.params.id;
   //  console.log(custID)
-    const q="update customer set `custName`= ?, `custAddress`= ?, `subscriptionType`= ?, `subscribedOn`= ?, `distCycled`= ?  WHERE custID = ?";
+  const q =
+    "update customer set `custName`= ?, `custAddress`= ?, `subscriptionType`= ?, `subscribedOn`= ?, `distCycled`= ?  WHERE custID = ?";
 
-    const values=[
-        req.body.custName,
-        req.body.custAddress,
-        req.body.subscriptionType,
-        req.body.subscribedOn,
-        req.body.distCycled,
-    ]
-   
-    db.query(q,[...values,custID],(err,data)=>{
-      //  console.log("function called")
+  const values = [
+    req.body.custName,
+    req.body.custAddress,
+    req.body.subscriptionType,
+    req.body.subscribedOn,
+    req.body.distCycled,
+  ];
 
-        if(err)
-        return res.json(err)
-        else
-        return res.send("Customer with ID:"+custID+" Updated")
-    })
-})
-app.delete("/customer/:id",(req,res)=>{
-    const custID=req.params.id
-   // console.log("called here")
-    const q=" delete from customer where custID = ? "
-    db.query(q,[custID],(err,data)=>{
-        if(err)
-        res.json(err)
-        else
-        res.send("Deleted Customer Successfully!")
-    })
-})
+  db.query(q, [...values, custID], (err, data) => {
+    //  console.log("function called")
+
+    if (err) return res.json(err);
+    else return res.send("Customer with ID:" + custID + " Updated");
+  });
+});
+app.delete("/customer/:id", (req, res) => {
+  const custID = req.params.id;
+  // console.log("called here")
+  const q = " delete from customer where custID = ? ";
+  db.query(q, [custID], (err, data) => {
+    if (err) res.json(err);
+    else res.send("Deleted Customer Successfully!");
+  });
+});
 //Cycle
-app.post("/cycle",(req,res)=>{
-    const q="insert into cycle (`cycCondition`,`serviceDate`,`isGear`) values (?) "
-    const values=[
-        req.body.cycCondition,
-        req.body.serviceDate,
-        req.body.isGear,
-    ]
-    //console.log(values)
-    db.query(q,[values],(err,data)=>{
-        if(err) return console.log(err)
-        else
-        return res.send("Customer Created")
-    })
-})
+app.post("/cycle", (req, res) => {
+  const q =
+    "insert into cycle (`cycCondition`,`serviceDate`,`isGear`) values (?) ";
+  const values = [req.body.cycCondition, req.body.serviceDate, req.body.isGear];
+  //console.log(values)
+  db.query(q, [values], (err, data) => {
+    if (err) return console.log("called here cycle");
+    else return res.send("Customer Created");
+  });
+});
 
-app.get("/cycle",(req,res)=>{
-    const q="Select * from cycle;"
-    db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        else
+app.get("/cycle", (req, res) => {
+  const q = "Select * from cycle;";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    else {
+      data.forEach((item) => {
+        item.serviceDate = item.serviceDate.toLocaleDateString();
+      });
+      return res.send(data);
+    }
+  });
+});
+app.put("/cycle/:id", (req, res) => {
+  const cycID = req.params.id;
+  // console.log(cycID)
+  const value = req.body.isGear === "Yes" ? 1 : 0;
+  const q =
+    "update cycle set `cycCondition`=?,`serviceDate`=?,`isGear`=?,`distTravelled`=? where cycleID=? ";
+  const values = [
+    req.body.cycCondition,
+    req.body.serviceDate,
+    value,
+    req.body.distTravelled,
+  ];
+  console.log(values);
+  db.query(q, [...values, cycID], (err, data) => {
+    if (err) return res.json(err);
+    else return res.send("Cycle Updated");
+  });
+});
 
-       {
-        data.forEach(item => {
-            item.serviceDate=item.serviceDate.toLocaleDateString()
-        })
-        return res.send(data)}
-    })
-})
-app.put("/cycle/:id",(req,res)=>{
-    const cycID=req.params.id
-   // console.log(cycID)
-    const value=(req.body.isGear==="Yes"?1:0)
-    const q="update cycle set `cycCondition`=?,`serviceDate`=?,`isGear`=?,`distTravelled`=? where cycleID=? "
-    const values=[
-        req.body.cycCondition,
-        req.body.serviceDate,
-        value,
-        req.body.distTravelled,
-    ]
-    console.log(values)
-    db.query(q,[...values,cycID],(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send("Cycle Updated")
-    })
-})
-
-app.delete("/cycle/:id",(req,res)=>{
-    const cycID=req.params.id
-    console.log(cycID)
-    const q=" delete from cycle where cycleID = ? "
-    db.query(q,[cycID],(err,data)=>{
-        if(err)
-        console.log(err)
-        else
-{      
-        res.send("Deleted cycle Successfully!")}
-    })
-})
+app.delete("/cycle/:id", (req, res) => {
+  const cycID = req.params.id;
+  console.log(cycID);
+  const q = " delete from cycle where cycleID = ? ";
+  db.query(q, [cycID], (err, data) => {
+    if (err) console.log(err);
+    else {
+      res.send("Deleted cycle Successfully!");
+    }
+  });
+});
 //Service
-app.get("/service",(req,res)=>{
-    const q="Select * from service;"
+app.get("/service", (req, res) => {
+  const q = "Select * from service;";
 
-    db.query(q,(err,data)=>{
-        data.forEach(item => {
-            item.dueDate=item.dueDate.toLocaleDateString()
-        });
-        if(err) return res.json(err)
-        else
-        return res.send(data)
-    })
-})
+  db.query(q, (err, data) => {
+    data.forEach((item) => {
+      item.dueDate = item.dueDate.toLocaleDateString();
+    });
+    if (err) return res.json(err);
+    else return res.send(data);
+  });
+});
 
-app.post("/service",(req,res)=>{
-    const q="insert into service (`empID`,`dueDate`,`sparePartsCount`,`cycID`) values (?) "
-    const values=[
-        req.body.empID,
-        req.body.dueDate,
-        req.body.sparePartsCount,
-        req.body.cycID,
-    ]
-    db.query(q,[values],(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send("Service Created")
-    })
-})
+app.post("/service", (req, res) => {
+  const q =
+    "insert into service (`empID`,`dueDate`,`sparePartsCount`,`cycID`) values (?) ";
+  const values = [
+    req.body.empID,
+    req.body.dueDate,
+    req.body.sparePartsCount,
+    req.body.cycID,
+  ];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    else return res.send("Service Created");
+  });
+});
 
-app.put("/service/:id",(req,res)=>{
-    const servID=req.params.id
-    const q="update service set `empID`=?,`dueDate`=?,`sparePartsCount`=?,`cycID`=? where serviceID=? "
-    const values=[
-        req.body.empID,
-        req.body.dueDate,
-        req.body.sparePartsCount,
-        req.body.cycID,
-    ]
-    db.query(q,[...values,servID],(err,data)=>{
-        if(err) return res.json(err)
-        else
-        return res.send("Service Updated")
-    })
-})
+app.put("/service/:id", (req, res) => {
+  const servID = req.params.id;
+  const q =
+    "update service set `empID`=?,`dueDate`=?,`sparePartsCount`=?,`cycID`=? where serviceID=? ";
+  const values = [
+    req.body.empID,
+    req.body.dueDate,
+    req.body.sparePartsCount,
+    req.body.cycID,
+  ];
+  db.query(q, [...values, servID], (err, data) => {
+    if (err) return res.json(err);
+    else return res.send("Service Updated");
+  });
+});
 
-app.delete("/service/:id",(req,res)=>{
-    const stnID=req.params.id
-    // console.log("called here")
-    const q=" delete from service where serviceID = ? "
-    db.query(q,[stnID],(err,data)=>{
-        if(err)
-        res.json(err)
-        else
-        res.send("Deleted Service Successfully!")
-    })
-})
+app.delete("/service/:id", (req, res) => {
+  const stnID = req.params.id;
+  // console.log("called here")
+  const q = " delete from service where serviceID = ? ";
+  db.query(q, [stnID], (err, data) => {
+    if (err) res.json(err);
+    else res.send("Deleted Service Successfully!");
+  });
+});
 
 //Tripdetails
-app.get("/tripdetails",(req,res)=>{
-    const q="Select * from tripdetails;"
+app.get("/tripdetails", (req, res) => {
+  const q = "Select * from tripdetails;";
 
-    db.query(q,(err,data)=>{
-     data.forEach(item => {
-             item.beginTime=item.beginTime.toLocaleDateString()+" "+item.beginTime.toLocaleTimeString()
-             item.endTime=item.endTime.toLocaleDateString()+" "+item.endTime.toLocaleTimeString()
+  db.query(q, (err, data) => {
+    data.forEach((item) => {
+      item.beginTime =
+        item.beginTime.toLocaleDateString() +
+        " " +
+        item.beginTime.toLocaleTimeString();
+      item.endTime =
+        item.endTime.toLocaleDateString() +
+        " " +
+        item.endTime.toLocaleTimeString();
+    });
+    if (err) return res.json(err);
+    else return res.send(data);
+  });
+});
 
-         });
-        if(err) return res.json(err)
-        else
-        return res.send(data)
-    })
-})
+app.post("/tripdetails", (req, res) => {
+  const q =
+    "insert into tripdetails (`stnID_start`,`stnID_end`,`cycID`,`custID`,`distTravelled`,`beginTime`,`endTime`) values (?) ";
+  const values = [
+    req.body.stnID_start,
+    req.body.stnID_end,
+    req.body.cycID,
+    req.body.custID,
+    req.body.distTravelled,
+    req.body.beginTime,
+    req.body.endTime,
+  ];
+  //console.log(values)
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    else res.send("Tripdetails entered successfully!");
+  });
+});
 
-app.post("/tripdetails",(req,res)=>{
-    const q="insert into tripdetails (`stnID_start`,`stnID_end`,`cycID`,`custID`,`distTravelled`,`beginTime`,`endTime`) values (?) "
-    const values=[
-        req.body.stnID_start,
-        req.body.stnID_end,
-        req.body.cycID,
-        req.body.custID,
-        req.body.distTravelled,
-        req.body.beginTime,
-        req.body.endTime
-    ]
-    console.log(values)
-    db.query(q,[values],(err,data)=>{
-        if(err)
-     console.log( res.json(err))
-        else
-             res.send("Tripdetails entered successfully!")
-    })
-})
+app.put("/tripdetails/:id", (req, res) => {
+  const q =
+    "update tripdetails set `stnID_start`=?,`stnID_end`=?,`cycID`=?,`custID`=?,`distTravelled`=?,`beginTime`=?,`endTime`=? where tripID=? ";
+  const values = [
+    req.body.stnID_start,
+    req.body.stnID_end,
+    req.body.cycID,
+    req.body.custID,
+    req.body.distTravelled,
+    req.body.beginTime,
+    req.body.endTime,
+  ];
+  console.log(values);
+  db.query(q, [...values, req.params.id], (err, data) => {
+    if (err) console.log("called here");
+    else res.send("Tripdetails updated successfully!");
+  });
+});
 
-app.put("/tripdetails/:id",(req,res)=>{
-    const q="update tripdetails set `stnID_start`=?,`stnID_end`=?,`cycID`=?,`custID`=?,`distTravelled`=?,`beginTime`=?,`endTime`=? where tripID=? "
-    const values=[
-        req.body.stnID_start,
-        req.body.stnID_end,
-        req.body.cycID,
-        req.body.custID,
-        req.body.distTravelled,
-        req.body.beginTime,
-        req.body.endTime
-    ]
-    console.log(values)
-    db.query(q,[...values,req.params.id],(err,data)=>{
-        if(err)
-         console.log( res.json(err))
-        else
-             res.send("Tripdetails updated successfully!")
-    })
-})
+app.delete("/tripdetails/:id", (req, res) => {
+  const stnID = req.params.id;
+  // console.log("called here")
+  const q = " delete from tripdetails where tripID = ? ";
+  db.query(q, [stnID], (err, data) => {
+    if (err) res.json(err);
+    else res.send("Deleted Trip Detail Successfully!");
+  });
+});
+app.listen(8080, () => {
+  console.log("Listening on port 8080");
+});
 
-app.delete("/tripdetails/:id",(req,res)=>{
-    const stnID=req.params.id
-    // console.log("called here")
-    const q=" delete from tripdetails where tripID = ? "
-    db.query(q,[stnID],(err,data)=>{
-        if(err)
-        res.json(err)
-        else
-        res.send("Deleted Trip Detail Successfully!")
-    })
-})
-app.listen(8080,()=>{
-    console.log("Listening on port 8080")
-})
+custapp.listen(7000, () => {
+  console.log("Listening Customer on 7000");
+});
