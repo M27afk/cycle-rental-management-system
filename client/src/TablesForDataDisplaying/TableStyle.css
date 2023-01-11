@@ -9,7 +9,7 @@
 }
 .content-table {
   /* align-self: center; */
-  background-color: #a892ee;
+  background-color: #5bacdf;
   border-collapse: collapse;
   margin: 50px 0;
   font-size: 0.9em;
@@ -48,17 +48,17 @@
   align-items: stretch;
 }
 .edit-delete-buttons {
-  background-color: #d2ecfc;
+  background-color: #0a588a;
   color: white;
   padding: 5px;
-  border: 1px solid grey;
+  border: 1px solid #0a588a;
   border-radius: 5px;
   margin: 1px 0;
   width: 100px;
 }
 .edit-delete-buttons:hover {
   cursor: pointer;
-  background-color: #5bacdf;
-  color: #40005d;
+  background-color: #1093e6;
+  color: white;
   transition: all 0.5s ease;
 }
