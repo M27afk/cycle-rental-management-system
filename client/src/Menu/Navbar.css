@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
 html {
   font-family: "Noto Sans JP", sans-serif;
@@ -9,11 +8,6 @@ html {
   background: #64bcf4;
   height: 80px;
   margin-bottom: 90px;
-=======
-.navbar {
-  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
-  height: 80px;
->>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,19 +15,12 @@ html {
 }
 
 .navbar-logo {
-<<<<<<< HEAD
   color: black;
-=======
-  color: #fff;
->>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   justify-self: start;
   margin-left: 20px;
   cursor: pointer;
   text-decoration: none;
-<<<<<<< HEAD
   font-weight: bolder;
-=======
->>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   font-size: 2rem;
 }
 
@@ -41,7 +28,6 @@ html {
   margin-left: 0.5rem;
   font-size: 1.6rem;
 }
-<<<<<<< HEAD
 .nav-menu1 {
   display: flex;
   justify-content: center;
@@ -51,22 +37,11 @@ html {
   display: flex;
   /* grid-template-columns: repeat(6, auto);
   grid-gap: 2px; */
-=======
-
-.nav-menu {
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-gap: 10px;
->>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   list-style: none;
   text-align: center;
   width: 70vw;
   justify-content: end;
-<<<<<<< HEAD
   margin-right: 1rem;
-=======
-  margin-right: 2rem;
->>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 }
 
 .nav-item {
@@ -79,18 +54,11 @@ html {
   color: white;
   text-decoration: none;
   padding: 0.5rem 1rem;
-<<<<<<< HEAD
   font-weight: bold;
 }
 
 .nav-links:hover {
   background-color: #084c78;
-=======
-}
-
-.nav-links:hover {
-  background-color: #1888ff;
->>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   border-radius: 4px;
   transition: all 0.2s ease-out;
 }
@@ -140,11 +108,7 @@ html {
   }
 
   .nav-links:hover {
-<<<<<<< HEAD
     background-color: #64bcf4;
-=======
-    background-color: #1888ff;
->>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
     border-radius: 0;
   }
 
@@ -177,24 +141,15 @@ html {
     margin: 2rem auto;
     border-radius: 4px;
     width: 80%;
-<<<<<<< HEAD
     background: #510674;
-=======
-    background: #1888ff;
->>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
     text-decoration: none;
     color: #fff;
     font-size: 1.5rem;
   }
 
   .nav-links-mobile:hover {
-<<<<<<< HEAD
     background: #c2cad0;
     color: #510674;
-=======
-    background: #fff;
-    color: #1888ff;
->>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
     transition: 250ms;
   }
 

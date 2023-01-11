@@ -21,7 +21,6 @@ import UpdateStationTable from "./UpdateTables/UpdateStationTable";
 import UpdateTripDetailTable from "./UpdateTables/UpdateTripDetailTable";
 import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable";
 import Home from "./Home";
-import View from "./report/view";
 
 function App() {
   return (
@@ -29,12 +28,6 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Home />} />
-
-      <Route path="/" element={<Home />} />
-      <Route path="/viewpdf" element={<View />} />
-
-      <Route path="/" element={<Home />} />
-      <Route path="/viewpdf" element={<View />} />
         <Route path="/customer" element={<CustomerTable />} />
         <Route path="/addcustomer" element={<CustomerDetailsForms />} />
         <Route path="/customer/:id" element={<UpdateCustomerTable />} />

@@ -3,8 +3,10 @@ import { useState } from "react";
 import "./GenralStyles.css";
 import axios from "axios";
 import { useNavigate } from "react-router";
-const options = ["Basic", "Premium"];
+import Navbar from "../Menu/Navbar";
+import image from "../image/bicycle2.png";
 
+const options = ["Basic", "Premium"];
 function CustomerDetailsForms() {
   const [enteredName, setEnteredName] = useState("");
   const nameChangeHandler = (event) => {
