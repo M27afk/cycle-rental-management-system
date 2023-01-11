@@ -21,13 +21,14 @@ import UpdateStationTable from "./UpdateTables/UpdateStationTable"
 import UpdateTripDetailTable from "./UpdateTables/UpdateTripDetailTable"
 import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable"
 import Home from "./Home";
+import View from "./report/view";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
       <Route path="/" element={<Home />} />
-
+      <Route path="/viewpdf" element={<View />} />
         <Route path="/customer" element={<CustomerTable />} />
         <Route path="/addcustomer" element={<CustomerDetailsForms />} />
         <Route path="/customer/:id" element={<UpdateCustomerTable />} />
@@ -51,6 +52,9 @@ function App() {
         <Route path="/service" element={<ServiceTable />} />
         <Route path="/addservice" element={<ServiceStationForms />} />
         <Route path="/service/:id" element={<UpdateServiceTable />} />
+
+        <Route path="/stationview" element={<StationTable />} />
+
       </Routes>
     </BrowserRouter>
   );

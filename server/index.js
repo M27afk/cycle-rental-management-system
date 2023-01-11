@@ -400,13 +400,15 @@ custapp.get("/custview", (req, res) => {
   const q = "Select * from customerView;";
 
   db1.query(q, (err, data) => {
+    data.forEach((item) => {
+      item.subscribedUpto = item.subscribedUpto.toLocaleDateString();
+    })
     if (err) return res.json(err);
     else return res.send(data);
   });
 });
-
 custapp.get("/stationview", (req, res) => {
-  const q = "Select * from stations;";
+  const q = "Select * from stations;"
 
   db1.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -415,7 +417,7 @@ custapp.get("/stationview", (req, res) => {
 });
 
 custapp.get("/cycle", (req, res) => {
-  const q = "Select * from customer;";
+  const q = "Select * from cycle;";
 
 
   db1.query(q, (err, data) => {

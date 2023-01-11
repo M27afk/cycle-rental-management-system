@@ -43,7 +43,7 @@ function UpdateEmployeeTable() {
     <div className="container">
       <div className="new-expense">
         <div className="login-header">
-          <header className="titles">Customer Details Updation Form</header>
+          <header className="titles">Employee Details Updation Form</header>
           {/* <img src="img/trin.png" alt="trin trin logo" className="trin-img" /> */}
         </div>
 
