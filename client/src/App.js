@@ -14,12 +14,21 @@ import EmployeeTable from "./TablesForDataDisplaying/EmployeeTable";
 import StationTable from "./TablesForDataDisplaying/StationTable";
 import ServiceTable from "./TablesForDataDisplaying/ServiceTable";
 import UpdateCustomerTable from "./UpdateTables/UpdateCustomerTable";
+<<<<<<< HEAD
 import UpdateCycleTable from "./UpdateTables/UpdateCycleTable";
 import UpdateEmployeeTable from "./UpdateTables/UpdateEmployeeTable";
 import UpdateServiceTable from "./UpdateTables/UpdateServiceTable";
 import UpdateStationTable from "./UpdateTables/UpdateStationTable";
 import UpdateTripDetailTable from "./UpdateTables/UpdateTripDetailTable";
 import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable";
+=======
+import UpdateCycleTable from "./UpdateTables/UpdateCycleTable"
+import UpdateEmployeeTable from "./UpdateTables/UpdateEmployeeTable"
+import UpdateServiceTable from "./UpdateTables/UpdateServiceTable"
+import UpdateStationTable from "./UpdateTables/UpdateStationTable"
+import UpdateTripDetailTable from "./UpdateTables/UpdateTripDetailTable"
+import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable"
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 import Home from "./Home";
 import View from "./report/view";
 
@@ -28,12 +37,17 @@ function App() {
     <BrowserRouter>
       <Routes>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Route path="/" element={<Home />} />
 
 =======
       <Route path="/" element={<Home />} />
       <Route path="/viewpdf" element={<View />} />
 >>>>>>> 7dee4df4d604797f5a1dc83f627dbb95b14dc0e5
+=======
+      <Route path="/" element={<Home />} />
+      <Route path="/viewpdf" element={<View />} />
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
         <Route path="/customer" element={<CustomerTable />} />
         <Route path="/addcustomer" element={<CustomerDetailsForms />} />
         <Route path="/customer/:id" element={<UpdateCustomerTable />} />
@@ -65,4 +79,8 @@ function App() {
   );
 }
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680

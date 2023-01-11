@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import "./TableStyle.css";
+=======
+import "./style.css";
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 
 // data from "./MockData.json";
 import axios from "axios";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import Navbar from "../Menu/Navbar";
+=======
+
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 function TripDetailTable() {
   const [contents, setContent] = useState([]);
   useEffect(() => {
@@ -30,6 +38,7 @@ function TripDetailTable() {
     }
   };
   return (
+<<<<<<< HEAD
     <>
       <Navbar />
       <div className="container">
@@ -88,6 +97,63 @@ function TripDetailTable() {
         </table>
       </div>
     </>
+=======
+    <div className="container">
+      <table className="content-table">
+        <thead>
+          <tr>
+            <th>Trip ID</th>
+            <th>Customer ID</th>
+            <th>Cycle ID</th>
+            <th>Start Station</th>
+            <th>End Station</th>
+            <th>Distance Travelled</th>
+            <th>Begin Time</th>
+            <th>End Time</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {contents.map((content) => (
+            <tr>
+              <td>{content.tripID}</td>
+              <td>{content.custID}</td>
+              <td>{content.cycID}</td>
+              <td>{content.stnID_start}</td>
+              <td>{content.stnID_end}</td>
+              <td>{content.distTravelled}</td>
+              <td>{content.beginTime}</td>
+              <td>{content.endTime}</td>
+              <td>
+                <div className="buttonContainer">
+                <Link to={`/tripdetails/${content.tripID}`} state={content}>
+                  {" "}
+                  <button
+                    className="edit-delete-buttons"
+                    variant="tertiary"
+                    size="xs"
+                  >
+                    Update
+                  </button>{" "}
+                </Link>
+                <button
+                  className="edit-delete-buttons"
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => {
+                    handleDelete(content.tripID);
+                  }}
+                >
+                  Delete
+                </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   );
 }
 

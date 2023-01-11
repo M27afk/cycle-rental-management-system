@@ -3,7 +3,10 @@
   height: auto;
   align-items: center;
   justify-content: center;
+<<<<<<< HEAD
   margin-top: 5rem;
+=======
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 }
 .new-expense__controls {
   display: flex;
@@ -41,24 +44,36 @@
 }
 
 .new-expense {
+<<<<<<< HEAD
+=======
+  background-color: #a892ee;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   padding: 2rem;
   width: 50rem;
   max-width: 95%;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+<<<<<<< HEAD
   margin-top: 8rem;
   margin-left: auto;
   margin-right: auto;
   background-color: #64bcf4;
+=======
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 }
 
 .new-expense button {
   font: inherit;
   cursor: pointer;
   padding: 1rem 2rem;
+<<<<<<< HEAD
   border: 1px solid #0c70af;
   background-color: #0c70af;
+=======
+  border: 1px solid #40005d;
+  background-color: #40005d;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   color: white;
   border-radius: 12px;
   margin-right: 1rem;
@@ -66,8 +81,13 @@
 
 .new-expense button:hover,
 .new-expense button:active {
+<<<<<<< HEAD
   background-color: #5bacdf;
   border-color: #5bacdf;
+=======
+  background-color: #510674;
+  border-color: #510674;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 }
 
 .new-expense button.alternative {
@@ -78,7 +98,11 @@
 
 .new-expense button.alternative:hover,
 .new-expense button.alternative:active {
+<<<<<<< HEAD
   background-color: #5bacdf;
+=======
+  background-color: #ddb3f8;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 }
 
 .login-header {
@@ -87,8 +111,12 @@
   justify-content: space-between;
 }
 .trin-img {
+<<<<<<< HEAD
   height: 2rem;
   width: 5rem;
+=======
+  height: 62px;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 }
 .titles {
   position: relative;
@@ -105,9 +133,13 @@
   height: 4px;
   width: 50px;
   border-radius: 8px;
+<<<<<<< HEAD
   background-color: #0c70af;
 }
 
 form {
   margin-top: 1rem;
+=======
+  background-color: #510674;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 }

@@ -14,7 +14,11 @@
 }
 
 .App-header {
+<<<<<<< HEAD
   /* background-color: #282c34; */
+=======
+  background-color: #282c34;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   min-height: 100vh;
   display: flex;
   flex-direction: column;
