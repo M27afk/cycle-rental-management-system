@@ -3,6 +3,7 @@
   height: auto;
   align-items: center;
   justify-content: center;
+  margin-top: 2rem;
 }
 .new-expense__controls {
   display: flex;
@@ -40,7 +41,7 @@
 }
 
 .new-expense {
-  background-color: #a892ee;
+  background-color: #64bcf4;
   padding: 2rem;
   width: 50rem;
   max-width: 95%;
@@ -53,8 +54,8 @@
   font: inherit;
   cursor: pointer;
   padding: 1rem 2rem;
-  border: 1px solid #40005d;
-  background-color: #40005d;
+  border: 1px solid #0a588a;
+  background-color: #0a588a;
   color: white;
   border-radius: 12px;
   margin-right: 1rem;
@@ -62,8 +63,8 @@
 
 .new-expense button:hover,
 .new-expense button:active {
-  background-color: #510674;
-  border-color: #510674;
+  background-color: #084c78;
+  border-color: #084c78;
 }
 
 .new-expense button.alternative {
@@ -100,5 +101,5 @@
   height: 4px;
   width: 50px;
   border-radius: 8px;
-  background-color: #510674;
+  background-color: #084c78;
 }

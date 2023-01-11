@@ -1,12 +1,20 @@
 * {
   font-family: "Noto Sans JP", sans-serif;
   box-sizing: border-box;
+  /* background-color: #f1f8fc; */
 }
 
+.container {
+  /* background-color: #f1f8fc; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .content-table {
-  background-color: #a892ee;
+  /* align-self: center; */
+  background-color: #5bacdf;
   border-collapse: collapse;
-  margin: 25px 0;
+  margin: 50px 0;
   font-size: 0.9em;
   padding: 1rem;
   width: 50rem;
@@ -17,7 +25,7 @@
 }
 
 .content-table thead tr {
-  background-color: #40005d;
+  background-color: #64bcf4;
   color: #ffffff;
   text-align: left;
   font-weight: bold;
@@ -29,31 +37,36 @@
 }
 
 .content-table tbody tr {
-  border-bottom: 0.5px solid #40005d;
+  border-bottom: 0.5px solid #0a588a;
   font-size: 1rem;
 }
 
 .content-table tbody tr:last-of-type {
-  border-bottom: 5px solid #40005d;
+  border-bottom: 5px solid #0a588a;
 }
-.buttonContainer{
+.buttonContainer {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
   align-items: stretch;
 }
-.edit-delete-buttons{
-  background-color: #40005d;
+.edit-delete-buttons {
+  background-color: #0a588a;
   color: white;
-  padding:5px;
-  border: 1px solid grey;
+  padding: 5px;
+  border: 1px solid #0a588a;
   border-radius: 5px;
   margin: 1px 0;
-  width:100px;
+  width: 100px;
 }
-.edit-delete-buttons:hover{
-  cursor:pointer;
-  background-color: white;
-  color: #40005d;
+.edit-delete-buttons:hover {
+  cursor: pointer;
+  background-color: #1093e6;
+  color: white;
   transition: all 0.5s ease;
+}
+.h1 {
+  display: flex;
+  justify-content: center;
+  margin-top: -1rem;
 }

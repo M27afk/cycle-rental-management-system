@@ -25,7 +25,7 @@ function LandingPage() {
           </div>
 
           <div className="right">
-            <img src={person} alt="Person Image" class="person" />
+            <img src={person} class="person" />
           </div>
         </div>
       </div>

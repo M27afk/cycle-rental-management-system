@@ -3,6 +3,7 @@ import "./style.css";
 // data from "./MockData.json";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../Menu/Navbar";
 
 function StationTable() {
   const [contents, setContent] = useState([]);
@@ -30,7 +31,7 @@ function StationTable() {
   //   }
   // };
   // const handleUpdate = async (content) => {
-   
+
   // <Link to={`/station/${content.stnID}`} state={content}> </Link>
 
   //   // try {
@@ -42,20 +43,23 @@ function StationTable() {
   //   // }
   // };
   return (
-    <div className="container">
-      <table className="content-table">
-        <thead>
-          <tr>
-            <th>Station Name</th>
-            <th>Station Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contents.map((content) => (
+    <>
+      <Navbar />
+      <h1 className="h1">Station Details </h1>
+      <div className="container">
+        <table className="content-table">
+          <thead>
             <tr>
-              <td>{content.stnName}</td>
-              <td>{content.stnAddress}</td>
-              {/* <td>
+              <th>Station Name</th>
+              <th>Station Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            {contents.map((content) => (
+              <tr>
+                <td>{content.stnName}</td>
+                <td>{content.stnAddress}</td>
+                {/* <td>
                  <Link to={`/station/${content.stnID}`}> 
                // ce.log(content)
                  <div className="buttonContainer">
@@ -82,11 +86,12 @@ function StationTable() {
                 </button>
                 </div>
               </td> */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 

@@ -3,6 +3,7 @@ import "./style.css";
 // data from "./MockData.json";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Navbar from "../Menu/Navbar";
 
 function CustomerTable() {
   const [contents, setContent] = useState([]);
@@ -20,26 +21,30 @@ function CustomerTable() {
     fetchContents();
   }, []);
   return (
-    <div className="container">
-      <table className="content-table">
-        <thead>
-          <tr>
-            <th>Customer Name</th>
-            <th>Subscribed Upto</th>
-            <th>Distance Cycled</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contents.map((content) => (
+    <>
+      <Navbar />
+      <h1 className="h1">Customer Details </h1>
+      <div className="container">
+        <table className="content-table">
+          <thead>
             <tr>
-              <td>{content.custName}</td>
-              <td>{content.subscribedUpto}</td>
-              <td>{content.distCycled}</td>
+              <th>Customer Name</th>
+              <th>Subscribed Upto</th>
+              <th>Distance Cycled</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {contents.map((content) => (
+              <tr>
+                <td>{content.custName}</td>
+                <td>{content.subscribedUpto}</td>
+                <td>{content.distCycled}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 
