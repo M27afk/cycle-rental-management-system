@@ -159,10 +159,7 @@ app.get("/customer", (req, res) => {
       data.forEach((item) => {
         item.subscribedOn = item.subscribedOn.toLocaleDateString();
         item.subscribedUpto = item.subscribedUpto.toLocaleDateString();
-        //console.log(item.subscribedOn)
       });
-      //data.subscribedOn=(d.subscribedOn).toLocaleString()
-
       return res.send(data);
     }
   });
@@ -183,9 +180,7 @@ app.post("/customer", (req, res) => {
 });
 
 app.put("/customer/:id", (req, res) => {
-  // console.log(req.params)
   const custID = req.params.id;
-  //  console.log(custID)
   const q =
     "update customer set `custName`= ?, `custAddress`= ?, `subscriptionType`= ?, `subscribedOn`= ?, `distCycled`= ?  WHERE custID = ?";
 
@@ -198,15 +193,12 @@ app.put("/customer/:id", (req, res) => {
   ];
 
   db.query(q, [...values, custID], (err, data) => {
-    //  console.log("function called")
-
     if (err) return res.json(err);
     else return res.send("Customer with ID:" + custID + " Updated");
   });
 });
 app.delete("/customer/:id", (req, res) => {
   const custID = req.params.id;
-  // console.log("called here")
   const q = " delete from customer where custID = ? ";
   db.query(q, [custID], (err, data) => {
     if (err) res.json(err);
