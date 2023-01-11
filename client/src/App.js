@@ -14,12 +14,12 @@ import EmployeeTable from "./TablesForDataDisplaying/EmployeeTable";
 import StationTable from "./TablesForDataDisplaying/StationTable";
 import ServiceTable from "./TablesForDataDisplaying/ServiceTable";
 import UpdateCustomerTable from "./UpdateTables/UpdateCustomerTable";
-import UpdateCycleTable from "./UpdateTables/UpdateCycleTable"
-import UpdateEmployeeTable from "./UpdateTables/UpdateEmployeeTable"
-import UpdateServiceTable from "./UpdateTables/UpdateServiceTable"
-import UpdateStationTable from "./UpdateTables/UpdateStationTable"
-import UpdateTripDetailTable from "./UpdateTables/UpdateTripDetailTable"
-import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable"
+import UpdateCycleTable from "./UpdateTables/UpdateCycleTable";
+import UpdateEmployeeTable from "./UpdateTables/UpdateEmployeeTable";
+import UpdateServiceTable from "./UpdateTables/UpdateServiceTable";
+import UpdateStationTable from "./UpdateTables/UpdateStationTable";
+import UpdateTripDetailTable from "./UpdateTables/UpdateTripDetailTable";
+import TripDetailTable from "./TablesForDataDisplaying/TripDetailTable";
 import Home from "./Home";
 import View from "./report/view";
 
@@ -27,6 +27,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+
+        <Route path="/" element={<Home />} />
+
+      <Route path="/" element={<Home />} />
+      <Route path="/viewpdf" element={<View />} />
+
       <Route path="/" element={<Home />} />
       <Route path="/viewpdf" element={<View />} />
         <Route path="/customer" element={<CustomerTable />} />

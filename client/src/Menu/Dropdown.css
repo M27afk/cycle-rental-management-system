@@ -1,5 +1,8 @@
 .dropdown-menu {
+<<<<<<< HEAD
+=======
   background: red;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
   width: 200px;
   position: absolute;
   top: 80px;
@@ -8,12 +11,23 @@
 }
 
 .dropdown-menu li {
+<<<<<<< HEAD
+  background: #0a588a;
+  cursor: pointer;
+  border-radius: 4px;
+  align-self: center;
+}
+
+.dropdown-menu li:hover {
+  background: #64bcf4;
+=======
   background: #1888ff;
   cursor: pointer;
 }
 
 .dropdown-menu li:hover {
   background: #5cabff;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 }
 
 .dropdown-menu.clicked {
@@ -26,7 +40,11 @@
   width: 100%;
   text-decoration: none;
   color: #fff;
+<<<<<<< HEAD
+  padding: 12px;
+=======
   padding: 16px;
+>>>>>>> 8a2e61c7acaf852cd6465de1a1fe48c1917a2680
 }
 
 @media screen and (max-width: 960px) {
