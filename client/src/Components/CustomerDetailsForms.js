@@ -22,15 +22,9 @@ function CustomerDetailsForms() {
   const addressChangeHandler = (event) => {
     setEnteredTAddress(event.target.value);
   };
-  // console.log(options[0])
   const [enteredSubscription, setEnterSubscription] = useState([options[0]]);
   console.log(enteredSubscription);
-  // const SubscriptionChangeHandler = (event) => {
-  //   console.log(event.target.value);
-  //   setEnterSubscription(Number(event.target.value));
 
-  
-  // };
   const navigate = useNavigate();
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -40,7 +34,6 @@ function CustomerDetailsForms() {
       custAddress: enteredAddress,
       subscriptionType: enteredSubscription,
     };
-    //console.log(customerData.subscribedOn);
 
     try {
       await axios.post("http://localhost:8080/customer", customerData);
@@ -48,7 +41,6 @@ function CustomerDetailsForms() {
     } catch (err) {
       console.log(err);
     }
-    //console.log(customerData);
     setEnteredName("");
     setEnteredDate("");
     setEnteredTAddress("");

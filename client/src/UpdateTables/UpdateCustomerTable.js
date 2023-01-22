@@ -46,7 +46,6 @@ const props=location.state
       <div className="new-expense">
         <div className="login-header">
           <header className="titles">Customer Details Updation Form</header>
-          {/* <img src="img/trin.png" alt="trin trin logo" className="trin-img" /> */}
         </div>
 
         <form>

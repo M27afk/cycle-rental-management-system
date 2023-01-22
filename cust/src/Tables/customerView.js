@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-// data from "./MockData.json";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import Navbar from "../Menu/Navbar";
 
 function CustomerTable() {
@@ -11,9 +9,7 @@ function CustomerTable() {
     const fetchContents = async () => {
       try {
         const res = await axios.get("http://localhost:7000/custview");
-        //  console.log(res.data);
         setContent(res.data);
-        //    console.log(res);
       } catch (err) {
         console.log(err);
       }

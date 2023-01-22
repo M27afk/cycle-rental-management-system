@@ -177,7 +177,7 @@ function Navbar() {
             onMouseLeave={onMouseLeave5}
           >
             <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-              TripDetails
+              Trip Details
             </Link>
             {dropdown5 && <DropdownTri />}
           </li>

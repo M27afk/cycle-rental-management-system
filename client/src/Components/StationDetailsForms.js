@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "./GenralStyles.css";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router";
+import {  useNavigate } from "react-router";
 import image from "../image/bicycle2.png";
 import Navbar from "../Menu/Navbar";
 function CustomerDetailsForms() {
@@ -36,7 +36,6 @@ function CustomerDetailsForms() {
     };
 
     try {
-     // console.log(stnData)
       const res=  await axios.post("http://localhost:8080/station", stnData)
       if(res.data.errno)
       alert (res.data.sqlMessage)
@@ -45,7 +44,6 @@ function CustomerDetailsForms() {
     } catch (err) {
       console.log(err);
     }
-    //console.log(customerData);
     setEnteredName("");
     setEnteredTAddress("");
   };

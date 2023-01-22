@@ -9,20 +9,22 @@ app.use(cors());
 const custapp = express();
 custapp.use(express.json());
 custapp.use(cors());
-
+//Add Admin Host with all privileges granted
 const db = mysql.createConnection({
   host: "localhost",
-  user: "dbproject",
-  password: "Dbms#12",
-  database: "cyc2",
+  user: "",
+  password: "",
+  database: "",
 });
+//Add Customer Host with only stationview and customerview granted
 
 const db1 = mysql.createConnection({
   host: "localhost",
-  user: "cycleCustomer",
-  password: "customer123",
-  database: "cyc2",
+  user: "",
+  password: "",
+  database: "",
 });
+
 db.connect((err) => {
   if (err) console.log(err);
 
@@ -34,10 +36,12 @@ db1.connect((err) => {
 
   console.log("Customer Database connected");
 });
-
+//custapp corresponds to customer host
 custapp.get("/", (req, res) => {
   res.send("Hello Customer");
 });
+
+//app corresponds to admin host
 app.get("/", (req, res) => {
   res.send("Hello");
 });
@@ -95,7 +99,6 @@ app.put("/station/:id", (req, res) => {
 
 app.delete("/station/:id", (req, res) => {
   const stnID = req.params.id;
-  // console.log("called here")
   const q = " delete from station where stnID = ? ";
   db.query(q, [stnID], (err, data) => {
     if (err) res.json(err);
@@ -149,6 +152,7 @@ app.delete("/employee/:id", (req, res) => {
     else return res.send("Employee deleted");
   });
 });
+
 //Customer
 app.get("/customer", (req, res) => {
   const q = "Select * from customer;";
@@ -205,12 +209,12 @@ app.delete("/customer/:id", (req, res) => {
     else res.send("Deleted Customer Successfully!");
   });
 });
+
 //Cycle
 app.post("/cycle", (req, res) => {
   const q =
     "insert into cycle (`cycCondition`,`serviceDate`,`isGear`) values (?) ";
   const values = [req.body.cycCondition, req.body.serviceDate, req.body.isGear];
-  //console.log(values)
   db.query(q, [values], (err, data) => {
     if (err) return console.log("called here cycle");
     else return res.send("Customer Created");
@@ -231,7 +235,6 @@ app.get("/cycle", (req, res) => {
 });
 app.put("/cycle/:id", (req, res) => {
   const cycID = req.params.id;
-  // console.log(cycID)
   const value = req.body.isGear === "Yes" ? 1 : 0;
   const q =
     "update cycle set `cycCondition`=?,`serviceDate`=?,`isGear`=?,`distTravelled`=? where cycleID=? ";
@@ -259,6 +262,7 @@ app.delete("/cycle/:id", (req, res) => {
     }
   });
 });
+
 //Service
 app.get("/service", (req, res) => {
   const q = "Select * from service;";
@@ -345,7 +349,6 @@ app.post("/tripdetails", (req, res) => {
     req.body.beginTime,
     req.body.endTime,
   ];
-  //console.log(values)
   db.query(q, [values], (err, data) => {
     if (err) return res.json(err);
     else res.send("Tripdetails entered successfully!");
@@ -373,21 +376,15 @@ app.put("/tripdetails/:id", (req, res) => {
 
 app.delete("/tripdetails/:id", (req, res) => {
   const stnID = req.params.id;
-  // console.log("called here")
   const q = " delete from tripdetails where tripID = ? ";
   db.query(q, [stnID], (err, data) => {
     if (err) res.json(err);
     else res.send("Deleted Trip Detail Successfully!");
   });
 });
-app.listen(8080, () => {
-  console.log("Listening on port 8080");
-});
 
-custapp.listen(7000, () => {
-  console.log("Listening Customer on 7000");
-});
-
+//routes defined on customer host
+//customer view
 custapp.get("/custview", (req, res) => {
   const q = "Select * from customerView;";
 
@@ -399,6 +396,7 @@ custapp.get("/custview", (req, res) => {
     else return res.send(data);
   });
 });
+//station view
 custapp.get("/stationview", (req, res) => {
   const q = "Select * from stations;"
 
@@ -407,7 +405,7 @@ custapp.get("/stationview", (req, res) => {
     else return res.send(data);
   });
 });
-
+//this is a demo for MySQL grant error, when customer tries to access '/cycle', MySQL denies it. 
 custapp.get("/cycle", (req, res) => {
   const q = "Select * from cycle;";
 
@@ -417,3 +415,14 @@ custapp.get("/cycle", (req, res) => {
     else return res.send(data);
   });
 });
+
+//admin app runs on 8080 port
+app.listen(8080, () => {
+  console.log("Listening on port 8080");
+});
+
+//customer app runs on 7000 port
+custapp.listen(7000, () => {
+  console.log("Listening Customer on 7000");
+});
+

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./TableStyle.css";
-// data from "./MockData.json";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Menu/Navbar";
+
 function ServiceTable() {
   const [contents, setContent] = useState([]);
   const navigate = useNavigate();

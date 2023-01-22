@@ -9,10 +9,6 @@ const options = ["Good", "Moderate", "Poor"];
 const gearCheck = ["Yes", "No"];
 
 function CycleDetailsForms() {
-  // const [enteredDistance, setEnteredDistance] = useState("");
-  // const distanceChangeHandler = (event) => {
-  //   setEnteredDistance(event.target.value);
-  // };
 
   const [enteredDate, setEnteredDate] = useState("");
   const dateChangeHandler = (event) => {
@@ -23,11 +19,6 @@ function CycleDetailsForms() {
 
   const [enterdCondition, setEnterCondition] = useState(options[0]);
   console.log(enterdCondition, enteredIsGear);
-  // const SubscriptionChangeHandler = (event) => {
-  //   console.log(event.target.value);
-  //   setEnterSubscription(Number(event.target.value));
-
-  // };
 
   const navigate = useNavigate();
   const submitHandler = async (event) => {
@@ -47,7 +38,6 @@ function CycleDetailsForms() {
     } catch (err) {
       console.log(err);
     }
-    // setEnteredDistance("");
     setEnteredDate("");
     setEnteredIsGear(gearCheck[0]);
     setEnterCondition(options[0]);
@@ -74,16 +64,7 @@ function CycleDetailsForms() {
                 ></input>
               </div>
 
-              {/* <div className="new-expense__control">
-              <label>Distance Travelled </label>
-              <input
-                type="number"
-                placeholder="Enter distance travelled"
-                onChange={distanceChangeHandler}
-                value={enteredDistance}
-                required
-              ></input>
-            </div> */}
+
 
               <div className="new-expense__control">
                 <label>Cycle Condition</label>
