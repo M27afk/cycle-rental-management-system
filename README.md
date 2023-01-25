@@ -22,4 +22,9 @@ Example:
 ->``npm install``  
 ->``npm start``  
 
+Ideally,
+The Admin app runs on ``localhost:3000``
+and
+The Customer app runs on ``localhost:3001``
+
 
